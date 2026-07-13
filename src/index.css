@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* Design tokens — warm coral accent on a soft blush surface (Rogers Foundation
+   reference style). A `--color-*` token becomes a Tailwind utility, e.g.
+   `--color-brand` -> `bg-brand` / `text-brand` / `border-brand`; a `--font-*`
+   token becomes `font-display` / `font-body`. */
+@theme {
+  --color-brand: #e0765a;
+  --color-brand-dark: #c85a3c;
+  --color-blush: #fce9e3;
+  --color-panel: #e4e4e4;
+  --color-ink: #333333;
+  --color-muted: #6b6b6b;
+
+  --font-display: 'Poppins', system-ui, sans-serif;
+  --font-body: 'Open Sans', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background-color: var(--color-blush);
+}
+
+/* Full-height column so the footer stays at the bottom on short pages. */
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
