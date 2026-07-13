@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import ecaLogo from '../assets/eca-logo.png'
 import meseligetLogo from '../assets/meseliget-logo.png'
@@ -25,6 +26,16 @@ export default function ProjectPage() {
         {paragraphs.map((paragraph, i) => (
           <p key={i}>{paragraph}</p>
         ))}
+      </div>
+
+      {/* Bottom button: the 3-letter wordmark, back to the home page. */}
+      <div className="mt-12 flex justify-center">
+        <Link
+          to="/"
+          className="rounded-full border-2 border-brand px-6 py-2 font-display text-sm font-extrabold uppercase tracking-wide text-brand transition-colors hover:bg-brand hover:text-white"
+        >
+          {t('brand')}
+        </Link>
       </div>
 
       {/* Implementing foundation, shown near the foot of the page. */}
