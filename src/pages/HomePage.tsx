@@ -14,7 +14,7 @@ export default function HomePage() {
           {t('home.subtitle')}
         </p>
         <Link
-          to="/about"
+          to="/project"
           className="mt-8 inline-block rounded-full bg-brand px-7 py-3 font-display font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-brand-dark"
         >
           {t('home.cta')}

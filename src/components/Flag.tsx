@@ -53,6 +53,13 @@ export default function Flag({ code, className }: FlagProps) {
           <rect width="1" height="2" x="2" fill="#ce1126" />
         </svg>
       )
+    case 'pl':
+      return (
+        <svg viewBox="0 0 8 5" className={className} aria-hidden="true">
+          <rect width="8" height="5" fill="#fff" />
+          <rect width="8" height="2.5" y="2.5" fill="#dc143c" />
+        </svg>
+      )
     default:
       return null
   }

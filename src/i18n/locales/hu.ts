@@ -1,28 +1,32 @@
 // Hungarian translations. Keep the same shape across every locale file.
 const hu = {
+  brand: 'EKA',
   nav: {
-    home: 'Kezdőlap',
-    about: 'Rólunk',
-    contact: 'Kapcsolat',
+    project: 'EKA projekt',
+    partners: 'Partnerek',
+    resources: 'Tudásforrás',
+    experience: 'Élménybeszámoló',
   },
   home: {
-    title: 'Üdvözlünk az ECA oldalán',
+    title: 'Üdvözlünk az EKA oldalán',
     subtitle: 'Többnyelvű bemutatkozó oldal — ez egy helykitöltő kezdőlap.',
-    cta: 'Tudj meg többet',
+    cta: 'Ismerd meg a projektet',
   },
-  about: {
-    title: 'Rólunk',
-    body: 'Ez helykitöltő tartalom. Cseréld le a projekt leírására.',
-    points: [
-      'Első helykitöltő pont a projekt egyik céljáról.',
-      'Második helykitöltő pont egy másik célról.',
-      'Harmadik helykitöltő pont egy további célról.',
-    ],
+  project: {
+    title: 'EKA projekt',
+    body: 'Ez helykitöltő tartalom az EKA projektről. Cseréld le a projekt céljainak és tevékenységeinek leírására.',
   },
-  contact: {
-    title: 'Kapcsolat',
-    body: 'Lépj velünk kapcsolatba — ez helykitöltő tartalom.',
-    email: 'Írj nekünk',
+  partners: {
+    title: 'Partnerek',
+    body: 'Ez helykitöltő tartalom. Mutasd be itt a partnerszervezeteket.',
+  },
+  resources: {
+    title: 'Tudásforrás',
+    body: 'Ez helykitöltő tartalom. Gyűjtsd ide a hasznos anyagokat és a tudást.',
+  },
+  experience: {
+    title: 'Élménybeszámoló',
+    body: 'Ez helykitöltő tartalom. Oszd meg itt a projekt élményeit és történeteit.',
   },
   footer: {
     rights: 'Minden jog fenntartva.',
