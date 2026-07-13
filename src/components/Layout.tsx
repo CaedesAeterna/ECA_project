@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
+import ecaLogo from '../assets/eca-logo.png'
 
 // Top-level navigation, shared by the desktop header and the mobile menu.
 const NAV = [
@@ -39,12 +40,13 @@ export default function Layout() {
       {/* Seamless header over the page background with just a hairline divider. */}
       <header className="sticky top-0 z-20 border-b border-ink/10 bg-blush/90 backdrop-blur">
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          {/* Wordmark — links back to the home page. */}
-          <NavLink
-            to="/"
-            className="font-display text-xl font-extrabold uppercase tracking-tight text-ink underline underline-offset-4"
-          >
-            {t('brand')}
+          {/* Wordmark — program logo + localized acronym, links back to home.
+              The logo is a transparent PNG, so it blends on the warm header. */}
+          <NavLink to="/" className="flex items-center gap-2.5">
+            <img src={ecaLogo} alt="" aria-hidden="true" className="h-9 w-auto sm:h-10" />
+            <span className="font-display text-xl font-extrabold uppercase tracking-tight text-ink underline underline-offset-4">
+              {t('brand')}
+            </span>
           </NavLink>
 
           {/* Desktop navigation + language selector */}
