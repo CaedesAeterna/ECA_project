@@ -4,8 +4,9 @@ import erasmusLogo from '../assets/erasmus-logo.jpg'
 import meseligetLogo from '../assets/meseliget-logo.png'
 import gedaniaLogo from '../assets/gedania-1922-logo.png'
 
-// Meseliget foundation site (language-neutral).
+// Meseliget foundation (language-neutral).
 const FOUNDATION_URL = 'https://www.meseligetalapitvany.hu'
+const FOUNDATION_NAME = 'Meseliget Alapítvány'
 
 export default function PartnersPage() {
   const { t } = useTranslation()
@@ -19,53 +20,49 @@ export default function PartnersPage() {
         {t('partners.title')}
       </h1>
 
-      <div className="mt-8 space-y-5 text-lg leading-relaxed text-ink">
-        {paragraphs.map((paragraph, i) => (
-          <p key={i}>{paragraph}</p>
-        ))}
-      </div>
-
-      {/* Playful cross-links: the wordmark -> home, plus a nod back to the project page. */}
-      <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
-        <Link
-          to="/"
-          className="font-display font-extrabold uppercase tracking-wide text-brand underline underline-offset-4 hover:text-brand-dark"
-        >
-          {t('brand')}
-        </Link>
-        <Link to="/project" className="text-muted underline underline-offset-4 hover:text-ink">
-          ← {t('nav.project')}
-        </Link>
-      </div>
-
-      {/* Funding + partner logos on a white strip so the opaque Erasmus JPG blends in. */}
-      <div className="mt-10 rounded-2xl bg-white px-6 py-8 shadow-sm">
+      {/* Funding + partner logos on a white strip, right after the title, so the
+          opaque Erasmus JPG blends in; transparent PNGs sit fine on white too. */}
+      <div className="mt-8 rounded-2xl bg-white px-6 py-8 shadow-sm">
         <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-14">
           <img
             src={erasmusLogo}
             alt="Co-funded by the Erasmus+ programme of the European Union"
             className="h-12 w-auto sm:h-14"
           />
-          <a
-            href={FOUNDATION_URL}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Meseliget Alapítvány"
-          >
-            <img src={meseligetLogo} alt="Meseliget Alapítvány" className="h-14 w-auto sm:h-16" />
-          </a>
+          <img src={meseligetLogo} alt={FOUNDATION_NAME} className="h-14 w-auto sm:h-16" />
           <img src={gedaniaLogo} alt="Gedania 1922" className="h-16 w-auto sm:h-20" />
         </div>
-        <p className="mt-5 text-center text-sm">
-          <a
-            href={FOUNDATION_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="font-semibold text-brand underline underline-offset-4 hover:text-brand-dark"
-          >
-            www.meseligetalapitvany.hu
-          </a>
-        </p>
+      </div>
+
+      <div className="mt-10 space-y-5 text-lg leading-relaxed text-ink">
+        {paragraphs.map((paragraph, i) => (
+          <p key={i}>{paragraph}</p>
+        ))}
+      </div>
+
+      {/* Bottom button: the 3-letter wordmark, back to the home page. */}
+      <div className="mt-12 flex justify-center">
+        <Link
+          to="/"
+          className="rounded-full border-2 border-brand px-6 py-2 font-display text-sm font-extrabold uppercase tracking-wide text-brand transition-colors hover:bg-brand hover:text-white"
+        >
+          {t('brand')}
+        </Link>
+      </div>
+
+      {/* Foundation credit at the very foot — same block as the project page. */}
+      <div className="mt-16 flex flex-col items-center gap-3 border-t border-ink/10 pt-10">
+        <a href={FOUNDATION_URL} target="_blank" rel="noreferrer" aria-label={FOUNDATION_NAME}>
+          <img src={meseligetLogo} alt={FOUNDATION_NAME} className="h-16 w-auto sm:h-20" />
+        </a>
+        <a
+          href={FOUNDATION_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="font-semibold text-brand underline underline-offset-4 hover:text-brand-dark"
+        >
+          www.meseligetalapitvany.hu
+        </a>
       </div>
     </section>
   )
