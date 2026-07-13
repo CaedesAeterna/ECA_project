@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
-import ecaLogo from '../assets/eca-logo.svg'
-import meseligetLogo from '../assets/meseliget-logo.svg'
+import ecaLogo from '../assets/eca-logo.png'
+import meseligetLogo from '../assets/meseliget-logo.png'
 
 // Implementing foundation — language-neutral, so kept out of the locale files.
 const FOUNDATION_URL = 'https://www.meseligetalapitvany.hu'
