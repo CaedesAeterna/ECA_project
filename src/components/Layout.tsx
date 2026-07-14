@@ -10,7 +10,7 @@ const NAV = [
   { to: '/project', key: 'nav.project' },
   { to: '/partners', key: 'nav.partners' },
   { to: '/resources', key: 'nav.resources' },
-  { to: '/experience', key: 'nav.experience' },
+  { to: '/events', key: 'nav.events' },
 ] as const
 
 // Shared chrome (header + footer) rendered around every page via <Outlet />.

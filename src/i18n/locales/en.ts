@@ -7,7 +7,7 @@ const en = {
     project: 'The ECA Project',
     partners: 'Partners',
     resources: 'Resources',
-    experience: 'Experience Report',
+    events: 'Events',
   },
   home: {
     expansion: 'Emotion · Cognition · Action',
@@ -16,7 +16,7 @@ const en = {
   },
   project: {
     title: 'The ECA Project',
-    // NOTE: en/ro/pl bodies are AI drafts of the Hungarian source — review before publishing.
+    // NOTE: en/pl bodies are AI drafts of the Hungarian source — review before publishing.
     paragraphs: [
       'The ECA programme (Emotion–Cognition–Action) is an innovative pedagogical initiative. Its intellectual foundation is person-centred pedagogy, which builds on learners’ individuality, intrinsic motivation and emotional security.',
       'The acronym ECA stands for the unity of Emotion, Cognition and Action. This model emphasises that the learning process becomes complete when students connect emotionally with the material, process it cognitively, and then apply their knowledge through active engagement. The aim of the programme is that children not only acquire knowledge, but also enjoy the learning process and are able to relate their studies to their own lives.',
@@ -37,7 +37,7 @@ const en = {
   },
   resources: {
     title: 'Resources',
-    // NOTE: en/ro/pl bodies are AI drafts of the Hungarian source — review before publishing.
+    // NOTE: en/pl bodies are AI drafts of the Hungarian source — review before publishing.
     paragraphs: [
       'If we had to sum up the project’s goal in a single sentence, it would be this: to prepare teachers so they can give students the greatest possible learning autonomy within the safest possible learning environment. This is also the ultimate goal of our curriculum.',
       'The handbook contains practical tools for person-centred, ECA-based (Emotion–Cognition–Action) teaching in the lower primary grades. As a teacher, you will find games, templates, lesson outlines and checklists here. As you get to know these practical tools, you also take on the attitude of person-centred pedagogy, since ECA is built on it.',
@@ -63,61 +63,20 @@ const en = {
       questions: 'Question collection',
     },
   },
-  experience: {
-    title: 'Experience Report',
-    // NOTE: en/ro/pl bodies are AI drafts of the Hungarian source — review before publishing.
-    headline: 'When learning is not only about the head – an ECA workshop in Jászberény',
-    lead: [
-      'What makes a learning experience truly lasting? Getting a lot of information? Or being touched by something along the way?',
-      'At a university workshop in Jászberény we explored how learning can be experience, thinking and action all at once.',
-    ],
-    caption: 'We presented ECA in Jászberény',
+  events: {
+    title: 'Events',
+    intro: 'Where the ECA approach comes to life – workshops, experience days and public events.',
+    countries: {
+      hu: 'Hungary',
+      pl: 'Poland',
+    },
+    empty: 'Coming soon…',
     gallery: {
-      title: 'Gallery',
-      alt: 'Photo from the Jászberény workshop',
+      alt: 'Photo from the event',
       close: 'Close',
       prev: 'Previous',
       next: 'Next',
     },
-    sections: [
-      {
-        heading: 'A morning that was not a “lesson”',
-        paragraphs: [
-          'At the Jászberény Campus of Eszterházy Károly Catholic University, 33 part-time students and 5 secondary-school pupils took part in a three-hour session. For the youngest it was an elective activity, while for the students it was built into their compulsory course hours. The aim was not to deliver yet another body of material, but to create an entirely different kind of learning experience. We wanted participants to be not passive listeners but active shapers of the process.',
-        ],
-      },
-      {
-        heading: 'What is ECA?',
-        paragraphs: ['ECA stands for three simple yet fundamental things:'],
-        list: [
-          'Emotion – how I feel, whether I feel safe',
-          'Cognition – what I understand, how I think',
-          'Action – what I try out, what I do',
-        ],
-        after: ['When these three are in balance, learning truly begins to work.'],
-      },
-      {
-        heading: 'We didn’t talk about it – we did it!',
-        paragraphs: ['During the morning, the participants:'],
-        list: [
-          'connected with one another through games',
-          'reflected on learning based on their own experiences',
-          'tried out cooperation in creative tasks',
-          'designed their own programmes',
-          'thought together and reflected on the meaning of the whole process',
-        ],
-        after: [
-          'There was a statue game, joint creation, role-play and brainstorming – and all the while an important realisation kept surfacing: there is no learning without involvement.',
-          'One of the key questions of the workshop was this: “Where am I in the learning process?” As a teacher, a parent, a helper – how present am I? Do I pay attention to the other person? Do I give them space?',
-        ],
-      },
-      {
-        heading: 'What did they take home?',
-        paragraphs: [
-          'At the end of the day, participants gave titles to their experience and put into words what they would tell others about it. Many different answers emerged, but one thing was common: this morning spoke not only to their heads but to their whole being – to their emotions, their bodies and their intellect alike. And perhaps that is the true essence of learning.',
-        ],
-      },
-    ],
   },
   footer: {
     rights: 'All rights reserved.',

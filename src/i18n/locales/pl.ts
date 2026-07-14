@@ -6,7 +6,7 @@ const pl = {
     project: 'Projekt EKA',
     partners: 'Partnerzy',
     resources: 'Baza wiedzy',
-    experience: 'Relacje',
+    events: 'Wydarzenia',
   },
   home: {
     expansion: 'Emocja · Kognicja · Akcja',
@@ -61,61 +61,20 @@ const pl = {
       questions: 'Zbiór pytań',
     },
   },
-  experience: {
-    title: 'Relacje',
-    // UWAGA: tłumaczenie wygenerowane automatycznie z języka węgierskiego — do weryfikacji.
-    headline: 'Gdy nauka nie dotyczy tylko głowy – warsztat EKA w Jászberény',
-    lead: [
-      'Co sprawia, że doświadczenie uczenia się jest naprawdę trwałe? To, że otrzymujemy dużo informacji? Czy to, że coś nas przy tym porusza?',
-      'Na uniwersyteckim warsztacie w Jászberény szukaliśmy tego, jak nauka może być jednocześnie doświadczeniem, myśleniem i działaniem.',
-    ],
-    caption: 'W Jászberény zaprezentowaliśmy EKA',
+  events: {
+    title: 'Wydarzenia',
+    intro: 'Tam, gdzie podejście EKA ożywa – warsztaty, dni doświadczeń i wydarzenia.',
+    countries: {
+      hu: 'Węgry',
+      pl: 'Polska',
+    },
+    empty: 'Wkrótce…',
     gallery: {
-      title: 'Galeria',
-      alt: 'Zdjęcie z warsztatu w Jászberény',
+      alt: 'Zdjęcie z wydarzenia',
       close: 'Zamknij',
       prev: 'Poprzednie',
       next: 'Następne',
     },
-    sections: [
-      {
-        heading: 'Przedpołudnie, które nie było „lekcją”',
-        paragraphs: [
-          'W Kampusie w Jászberény Katolickiego Uniwersytetu Eszterházy Károly 33 studentów zaocznych i 5 uczniów szkoły średniej wzięło udział w trzygodzinnych zajęciach. Dla najmłodszych były to zajęcia do wyboru, a dla studentów zostały wpisane w obowiązkowy wymiar godzin. Celem nie było przekazanie kolejnej porcji materiału, lecz stworzenie zupełnie innego rodzaju doświadczenia uczenia się. Zależało nam na tym, aby uczestnicy nie byli biernymi słuchaczami, lecz aktywnymi współtwórcami procesu.',
-        ],
-      },
-      {
-        heading: 'Czym jest EKA?',
-        paragraphs: ['EKA oznacza trzy proste, a jednak podstawowe rzeczy:'],
-        list: [
-          'Emocja – jak się czuję, czy czuję się bezpiecznie',
-          'Kognicja – co rozumiem, jak myślę',
-          'Akcja – czego próbuję, co robię',
-        ],
-        after: ['Gdy te trzy elementy są w równowadze, nauka naprawdę zaczyna działać.'],
-      },
-      {
-        heading: 'Nie mówiliśmy o tym – robiliśmy to!',
-        paragraphs: ['W trakcie przedpołudnia uczestnicy:'],
-        list: [
-          'nawiązywali ze sobą kontakt poprzez zabawy',
-          'zastanawiali się nad uczeniem się na podstawie własnych doświadczeń',
-          'wypróbowywali współpracę w twórczych zadaniach',
-          'projektowali własne programy',
-          'wspólnie myśleli i zastanawiali się nad sensem całego procesu',
-        ],
-        after: [
-          'Była gra w rzeźby, wspólne tworzenie, ćwiczenie sytuacyjne, burza mózgów – a przy tym nieustannie rodziło się ważne odkrycie: nie da się uczyć bez zaangażowania.',
-          'Jednym z kluczowych pytań warsztatu było to: „Gdzie jestem ja w procesie uczenia się?” Jako nauczyciel, rodzic, osoba wspierająca – na ile jestem obecny? Czy zwracam uwagę na drugą osobę? Czy daję jej przestrzeń?',
-        ],
-      },
-      {
-        heading: 'Co zabrali ze sobą do domu?',
-        paragraphs: [
-          'Na koniec dnia uczestnicy nadali tytuły swojemu doświadczeniu i sformułowali, co opowiedzieliby o nim innym. Pojawiło się wiele różnych odpowiedzi, ale jedno było wspólne: to przedpołudnie przemówiło nie tylko do ich głów, lecz do całej ich istoty – zarówno do emocji, ciała, jak i intelektu. I być może właśnie na tym polega prawdziwa istota uczenia się.',
-        ],
-      },
-    ],
   },
   footer: {
     rights: 'Wszelkie prawa zastrzeżone.',

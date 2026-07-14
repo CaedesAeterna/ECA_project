@@ -6,7 +6,7 @@ const hu = {
     project: 'EKA projekt',
     partners: 'Partnerek',
     resources: 'Tudásforrás',
-    experience: 'Élménybeszámoló',
+    events: 'Események',
   },
   home: {
     // Spelled-out, per-language expansion of the brand acronym.
@@ -60,60 +60,20 @@ const hu = {
       questions: 'Kérdésgyűjtemény',
     },
   },
-  experience: {
-    title: 'Élménybeszámoló',
-    headline: 'Amikor a tanulás nem csak a fejről szól – ECA workshop Jászberényben',
-    lead: [
-      'Mitől lesz egy tanulási élmény igazán maradandó? Attól, hogy sok információt kapunk? Vagy attól, hogy valami megérint bennünket közben?',
-      'Egy jászberényi egyetemi workshopon azt kerestük, hogyan lehet a tanulás egyszerre élmény, gondolkodás és cselekvés.',
-    ],
-    caption: 'Jászberényben bemutattuk az EKA-t',
+  events: {
+    title: 'Események',
+    intro: 'Ahol az ECA szemlélet életre kel – műhelyek, élménynapok és rendezvények.',
+    countries: {
+      hu: 'Magyarország',
+      pl: 'Lengyelország',
+    },
+    empty: 'Hamarosan…',
     gallery: {
-      title: 'Galéria',
-      alt: 'Fénykép a jászberényi workshopról',
+      alt: 'Fénykép az eseményről',
       close: 'Bezárás',
       prev: 'Előző',
       next: 'Következő',
     },
-    sections: [
-      {
-        heading: 'Egy délelőtt, ami nem „óra” volt',
-        paragraphs: [
-          'Az Eszterházy Károly Katolikus Egyetem Jászberényi Campusán 33 levelezős hallgató és 5 középiskolás diák vett részt egy háromórás foglalkozáson. A legfiatalabbak számára ez választott foglalkozás volt, a hallgatók számára pedig a kötelező órakeretbe épült be ez az alkalom. A cél nem egy újabb tananyag átadása volt, hanem egy egészen másfajta tanulási élmény megteremtése. Törekedtünk rá, hogy a résztvevők ne passzív hallgatók, hanem aktív alakítói legyenek a folyamatnak.',
-        ],
-      },
-      {
-        heading: 'Mi az az ECA?',
-        paragraphs: ['Az ECA három egyszerű, mégis alapvető dolgot jelent:'],
-        list: [
-          'Érzelem – hogyan érzem magam, biztonságban vagyok-e',
-          'Kogníció – mit értek meg, hogyan gondolkodom',
-          'Akció – mit próbálok ki, mit teszek',
-        ],
-        after: ['Ha ez a három egyensúlyban van, akkor a tanulás valóban működni kezd.'],
-      },
-      {
-        heading: 'Nem beszéltünk róla – csináltuk!',
-        paragraphs: ['A délelőtt során a résztvevők:'],
-        list: [
-          'játékokon keresztül kapcsolódtak egymáshoz',
-          'saját élményeken alapján gondolkodtak a tanulásról',
-          'kreatív feladatokban próbálták ki az együttműködést',
-          'saját programokat terveztek',
-          'együtt gondolkodtak és reflektáltak az egész folyamat értelmére',
-        ],
-        after: [
-          'Volt szoborjáték, közös alkotás helyzetgyakorlat, ötletelés – és közben folyamatosan született valami fontos felismerés: tanulni nem lehet bevonódás nélkül.',
-          'A workshop egyik kulcskérdése ez volt: „Hol vagyok én a tanulási folyamatban?” Tanítóként, szülőként, segítőként – mennyire vagyok jelen? Figyelek-e a másikra? Teret adok-e neki?',
-        ],
-      },
-      {
-        heading: 'Mit vittek haza?',
-        paragraphs: [
-          'A résztvevők a nap végén címeket adtak az élményüknek, és megfogalmazták, mit mesélnének róla másoknak. Sokféle válasz született, de egy dolog közös volt: ez a délelőtt nem csak a fejükhöz szólt, hanem egész lényükhöz: érzelmeikhez, testükhöz, intellektusukhoz egyaránt. És talán ez a tanulás valódi lényege.',
-        ],
-      },
-    ],
   },
   footer: {
     rights: 'Minden jog fenntartva.',
