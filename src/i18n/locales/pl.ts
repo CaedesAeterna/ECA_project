@@ -9,9 +9,9 @@ const pl = {
     experience: 'Relacje',
   },
   home: {
-    title: 'Witamy w EKA',
-    subtitle: 'Wielojęzyczna strona prezentacyjna — to jest przykładowa strona główna.',
-    cta: 'Poznaj projekt',
+    expansion: 'Emocja · Kognicja · Akcja',
+    tagline: 'Ludzkie podejście do uczenia się',
+    cta: 'Spróbujesz?',
   },
   project: {
     title: 'Projekt EKA',

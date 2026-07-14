@@ -9,9 +9,10 @@ const hu = {
     experience: 'Élménybeszámoló',
   },
   home: {
-    title: 'Üdvözlünk az EKA oldalán',
-    subtitle: 'Többnyelvű bemutatkozó oldal — ez egy helykitöltő kezdőlap.',
-    cta: 'Ismerd meg a projektet',
+    // Spelled-out, per-language expansion of the brand acronym.
+    expansion: 'Emóció · Kogníció · Akció',
+    tagline: 'A tanulás emberi megközelítése',
+    cta: 'Te kipróbálnád?',
   },
   project: {
     title: 'EKA projekt',

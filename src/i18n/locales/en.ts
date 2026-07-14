@@ -10,9 +10,9 @@ const en = {
     experience: 'Experience Report',
   },
   home: {
-    title: 'Welcome to ECA',
-    subtitle: 'A multilingual presentation site — this is a placeholder home page.',
-    cta: 'Discover the project',
+    expansion: 'Emotion · Cognition · Action',
+    tagline: 'A human approach to learning',
+    cta: 'Would you try it?',
   },
   project: {
     title: 'The ECA Project',

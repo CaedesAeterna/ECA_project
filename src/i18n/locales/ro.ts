@@ -11,9 +11,9 @@ const ro = {
     experience: 'Impresii',
   },
   home: {
-    title: 'Bine ai venit la ECA',
-    subtitle: 'Un site de prezentare multilingv — aceasta este o pagină de start temporară.',
-    cta: 'Descoperă proiectul',
+    expansion: 'Emoție · Cogniție · Acțiune',
+    tagline: 'O abordare umană a învățării',
+    cta: 'Tu ai încerca?',
   },
   project: {
     title: 'Proiectul ECA',
