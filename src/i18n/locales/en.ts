@@ -55,6 +55,13 @@ const en = {
     handbook: 'ECA Teacher Handbook',
     curriculum: 'ECA Curriculum',
     download: 'Download (PDF)',
+    more: 'Further materials',
+    categories: {
+      lesson_plan: 'Lesson plans',
+      worksheet: 'Worksheets',
+      hw: 'Homework',
+      questions: 'Question collection',
+    },
   },
   experience: {
     title: 'Experience Report',

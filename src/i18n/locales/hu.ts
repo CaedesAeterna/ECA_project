@@ -52,6 +52,13 @@ const hu = {
     handbook: 'ECA tanári kézikönyv',
     curriculum: 'ECA tanterv',
     download: 'Letöltés (PDF)',
+    more: 'További tananyagok',
+    categories: {
+      lesson_plan: 'Óravázlatok',
+      worksheet: 'Feladatlapok',
+      hw: 'Házi feladatok',
+      questions: 'Kérdésgyűjtemény',
+    },
   },
   experience: {
     title: 'Élménybeszámoló',

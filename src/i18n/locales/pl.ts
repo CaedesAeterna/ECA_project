@@ -53,6 +53,13 @@ const pl = {
     handbook: 'Podręcznik nauczyciela EKA',
     curriculum: 'Program nauczania EKA',
     download: 'Pobierz (PDF)',
+    more: 'Dodatkowe materiały',
+    categories: {
+      lesson_plan: 'Scenariusze lekcji',
+      worksheet: 'Karty pracy',
+      hw: 'Prace domowe',
+      questions: 'Zbiór pytań',
+    },
   },
   experience: {
     title: 'Relacje',
