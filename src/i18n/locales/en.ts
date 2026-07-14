@@ -57,7 +57,52 @@ const en = {
   },
   experience: {
     title: 'Experience Report',
-    body: 'This is placeholder content. Share stories and experiences from the project here.',
+    // NOTE: en/ro/pl bodies are AI drafts of the Hungarian source — review before publishing.
+    headline: 'When learning is not only about the head – an ECA workshop in Jászberény',
+    lead: [
+      'What makes a learning experience truly lasting? Getting a lot of information? Or being touched by something along the way?',
+      'At a university workshop in Jászberény we explored how learning can be experience, thinking and action all at once.',
+    ],
+    caption: 'We presented ECA in Jászberény',
+    sections: [
+      {
+        heading: 'A morning that was not a “lesson”',
+        paragraphs: [
+          'At the Jászberény Campus of Eszterházy Károly Catholic University, 33 part-time students and 5 secondary-school pupils took part in a three-hour session. For the youngest it was an elective activity, while for the students it was built into their compulsory course hours. The aim was not to deliver yet another body of material, but to create an entirely different kind of learning experience. We wanted participants to be not passive listeners but active shapers of the process.',
+        ],
+      },
+      {
+        heading: 'What is ECA?',
+        paragraphs: ['ECA stands for three simple yet fundamental things:'],
+        list: [
+          'Emotion – how I feel, whether I feel safe',
+          'Cognition – what I understand, how I think',
+          'Action – what I try out, what I do',
+        ],
+        after: ['When these three are in balance, learning truly begins to work.'],
+      },
+      {
+        heading: 'We didn’t talk about it – we did it!',
+        paragraphs: ['During the morning, the participants:'],
+        list: [
+          'connected with one another through games',
+          'reflected on learning based on their own experiences',
+          'tried out cooperation in creative tasks',
+          'designed their own programmes',
+          'thought together and reflected on the meaning of the whole process',
+        ],
+        after: [
+          'There was a statue game, joint creation, role-play and brainstorming – and all the while an important realisation kept surfacing: there is no learning without involvement.',
+          'One of the key questions of the workshop was this: “Where am I in the learning process?” As a teacher, a parent, a helper – how present am I? Do I pay attention to the other person? Do I give them space?',
+        ],
+      },
+      {
+        heading: 'What did they take home?',
+        paragraphs: [
+          'At the end of the day, participants gave titles to their experience and put into words what they would tell others about it. Many different answers emerged, but one thing was common: this morning spoke not only to their heads but to their whole being – to their emotions, their bodies and their intellect alike. And perhaps that is the true essence of learning.',
+        ],
+      },
+    ],
   },
   footer: {
     rights: 'All rights reserved.',

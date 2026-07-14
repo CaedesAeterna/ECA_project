@@ -57,7 +57,52 @@ const ro = {
   },
   experience: {
     title: 'Impresii',
-    body: 'Acesta este conținut temporar. Împărtășește aici poveștile și experiențele din proiect.',
+    // NOTĂ: traducere generată automat din maghiară — de verificat înainte de publicare.
+    headline: 'Când învățarea nu ține doar de minte – un workshop ECA la Jászberény',
+    lead: [
+      'Ce anume face ca o experiență de învățare să fie cu adevărat durabilă? Faptul că primim multe informații? Sau faptul că ceva ne atinge pe parcurs?',
+      'La un workshop universitar din Jászberény am căutat cum poate fi învățarea, în același timp, experiență, gândire și acțiune.',
+    ],
+    caption: 'La Jászberény am prezentat ECA',
+    sections: [
+      {
+        heading: 'O dimineață care nu a fost o „oră”',
+        paragraphs: [
+          'La Campusul din Jászberény al Universității Catolice Eszterházy Károly, 33 de studenți la învățământ cu frecvență redusă și 5 elevi de liceu au participat la o activitate de trei ore. Pentru cei mai mici a fost o activitate opțională, iar pentru studenți s-a integrat în orele obligatorii. Scopul nu a fost transmiterea unei noi materii, ci crearea unui cu totul alt fel de experiență de învățare. Ne-am străduit ca participanții să nu fie ascultători pasivi, ci artizani activi ai procesului.',
+        ],
+      },
+      {
+        heading: 'Ce este ECA?',
+        paragraphs: ['ECA înseamnă trei lucruri simple, dar fundamentale:'],
+        list: [
+          'Emoție – cum mă simt, dacă sunt în siguranță',
+          'Cogniție – ce înțeleg, cum gândesc',
+          'Acțiune – ce încerc, ce fac',
+        ],
+        after: ['Când aceste trei elemente sunt în echilibru, învățarea începe cu adevărat să funcționeze.'],
+      },
+      {
+        heading: 'Nu am vorbit despre ea – am făcut-o!',
+        paragraphs: ['În cursul dimineții, participanții:'],
+        list: [
+          's-au conectat unii cu alții prin jocuri',
+          'au reflectat asupra învățării pornind de la propriile experiențe',
+          'au experimentat colaborarea în sarcini creative',
+          'și-au proiectat propriile programe',
+          'au gândit împreună și au reflectat asupra sensului întregului proces',
+        ],
+        after: [
+          'A fost un joc al statuilor, creație comună, exercițiu de situație, brainstorming – și, între timp, se năștea mereu o realizare importantă: nu poți învăța fără implicare.',
+          'Una dintre întrebările-cheie ale workshopului a fost aceasta: „Unde sunt eu în procesul de învățare?” Ca învățător, ca părinte, ca persoană care sprijină – cât de prezent sunt? Sunt atent la celălalt? Îi ofer spațiu?',
+        ],
+      },
+      {
+        heading: 'Ce au dus acasă?',
+        paragraphs: [
+          'La finalul zilei, participanții au dat titluri experienței lor și au formulat ce le-ar povesti altora despre ea. Au apărut răspunsuri foarte diferite, dar un lucru a fost comun: această dimineață nu s-a adresat doar minții lor, ci întregii lor ființe – deopotrivă emoțiilor, corpului și intelectului. Și poate că tocmai aceasta este adevărata esență a învățării.',
+        ],
+      },
+    ],
   },
   footer: {
     rights: 'Toate drepturile rezervate.',
