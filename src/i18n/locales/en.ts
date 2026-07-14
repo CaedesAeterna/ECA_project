@@ -53,6 +53,7 @@ const en = {
       },
     ],
     handbook: 'ECA Teacher Handbook',
+    curriculum: 'ECA Curriculum',
     download: 'Download (PDF)',
   },
   experience: {

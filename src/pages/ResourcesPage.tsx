@@ -1,13 +1,110 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
-// The teacher handbook is a single (Hungarian) pilot PDF, so the URL is
-// language-neutral; only its label is translated in the locale files.
-const HANDBOOK_URL =
-  'https://ecaproject.eu/wp-content/uploads/2026/06/ECA_tanari_kezikonyv_kulso_pilot.pdf'
+// Teacher materials: one PDF per UI language, bundled with the site (Vite hashes
+// each file and returns its URL). WordPress is gone, so these must be served
+// locally. Drop a new language's file into the folder and it is picked up
+// automatically at build time — see byLanguage() for the naming convention.
+const handbookModules = import.meta.glob('../assets/resources/handbook/*.pdf', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>
+const curriculumModules = import.meta.glob('../assets/resources/curriculum/*.pdf', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>
+
+// Map each PDF to a UI language by the EN/HU/PL token in its filename, e.g.
+// "ECA Handbook EN.pdf" -> en, "ECA_Handbook_PL_FINAL.pdf" -> pl. The token must
+// be delimited by a space, underscore or dash so it can't match inside a word.
+function byLanguage(modules: Record<string, string>): Record<string, string> {
+  const out: Record<string, string> = {}
+  for (const [path, url] of Object.entries(modules)) {
+    const name = path.split('/').pop() ?? ''
+    const match = name.match(/[ _-](en|hu|pl)[ _.]/i)
+    if (match) out[match[1].toLowerCase()] = url
+  }
+  return out
+}
+const handbooks = byLanguage(handbookModules)
+const curricula = byLanguage(curriculumModules)
+
+// Clean download filenames, independent of the (messy) source file names.
+const DOWNLOAD_NAME: Record<string, { handbook: string; curriculum: string }> = {
+  en: { handbook: 'ECA_Handbook_EN.pdf', curriculum: 'ECA_Curriculum_EN.pdf' },
+  hu: { handbook: 'ECA_tanari_kezikonyv_HU.pdf', curriculum: 'ECA_tanterv_HU.pdf' },
+  pl: { handbook: 'ECA_Podrecznik_PL.pdf', curriculum: 'ECA_Program_nauczania_PL.pdf' },
+}
+
+// Document (file) icon used on each download card.
+function DocIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className="h-9 w-9 shrink-0 text-brand group-hover:text-white"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M14 3v5h5" />
+      <path d="M15 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z" />
+    </svg>
+  )
+}
+
+// Down-arrow icon, pushed to the right edge of each download card.
+function DownloadArrow() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className="ml-auto h-6 w-6 shrink-0"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 3v12" />
+      <path d="M7 10l5 5 5-5" />
+      <path d="M5 21h14" />
+    </svg>
+  )
+}
+
+// One prominent download card for a bundled PDF (handbook or curriculum).
+function DownloadCard({
+  href,
+  download,
+  title,
+  subtitle,
+}: {
+  href: string
+  download: string
+  title: string
+  subtitle: string
+}) {
+  return (
+    <a
+      href={href}
+      download={download}
+      className="group flex items-center gap-4 rounded-2xl border-2 border-brand bg-brand/5 px-6 py-5 text-ink transition-colors hover:bg-brand hover:text-white"
+    >
+      <DocIcon />
+      <span className="flex flex-col">
+        <span className="font-display text-lg font-extrabold tracking-tight">{title}</span>
+        <span className="text-sm text-muted group-hover:text-white/80">{subtitle}</span>
+      </span>
+      <DownloadArrow />
+    </a>
+  )
+}
 
 export default function ResourcesPage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   // Body copy and the two feature cards are stored in the locale files.
   const paragraphs = t('resources.paragraphs', { returnObjects: true }) as string[]
@@ -15,6 +112,12 @@ export default function ResourcesPage() {
     title: string
     body: string
   }[]
+
+  // Serve the PDF pair matching the active UI language, falling back to English.
+  const lang = (i18n.resolvedLanguage ?? 'en').slice(0, 2)
+  const handbookUrl = handbooks[lang] ?? handbooks.en
+  const curriculumUrl = curricula[lang] ?? curricula.en
+  const names = DOWNLOAD_NAME[lang] ?? DOWNLOAD_NAME.en
 
   return (
     <section className="mx-auto max-w-3xl">
@@ -40,51 +143,25 @@ export default function ResourcesPage() {
         ))}
       </div>
 
-      {/* Prominent download of the teacher handbook (external PDF, new tab). */}
-      <a
-        href={HANDBOOK_URL}
-        target="_blank"
-        rel="noreferrer"
-        className="group mt-10 flex items-center gap-4 rounded-2xl border-2 border-brand bg-brand/5 px-6 py-5 text-ink transition-colors hover:bg-brand hover:text-white"
-      >
-        {/* Document icon. */}
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          className="h-9 w-9 shrink-0 text-brand group-hover:text-white"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M14 3v5h5" />
-          <path d="M15 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z" />
-        </svg>
-        <span className="flex flex-col">
-          <span className="font-display text-lg font-extrabold tracking-tight">
-            {t('resources.handbook')}
-          </span>
-          <span className="text-sm text-muted group-hover:text-white/80">
-            {t('resources.download')}
-          </span>
-        </span>
-        {/* Download arrow, pushed to the right edge. */}
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          className="ml-auto h-6 w-6 shrink-0"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M12 3v12" />
-          <path d="M7 10l5 5 5-5" />
-          <path d="M5 21h14" />
-        </svg>
-      </a>
+      {/* Language-matched downloads: teacher handbook next to the curriculum. */}
+      <div className="mt-10 grid gap-5 sm:grid-cols-2">
+        {handbookUrl && (
+          <DownloadCard
+            href={handbookUrl}
+            download={names.handbook}
+            title={t('resources.handbook')}
+            subtitle={t('resources.download')}
+          />
+        )}
+        {curriculumUrl && (
+          <DownloadCard
+            href={curriculumUrl}
+            download={names.curriculum}
+            title={t('resources.curriculum')}
+            subtitle={t('resources.download')}
+          />
+        )}
+      </div>
 
       {/* Bottom button: the 3-letter wordmark, back to the home page. */}
       <div className="mt-12 flex justify-center">

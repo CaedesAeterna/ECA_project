@@ -6,7 +6,7 @@ type FlagProps = {
 }
 
 // Inline SVG flags. Emoji flags (🇬🇧) don't render on many Linux setups (they
-// fall back to "GB"/"HU"/"RO" letters), so we draw them as SVG for a consistent
+// fall back to "GB"/"HU"/"PL" letters), so we draw them as SVG for a consistent
 // look everywhere and zero external requests.
 export default function Flag({ code, className }: FlagProps) {
   // Unique ids so the UK flag's clip paths don't collide when rendered twice
@@ -43,14 +43,6 @@ export default function Flag({ code, className }: FlagProps) {
           <rect width="6" height="3" fill="#fff" />
           <rect width="6" height="1" fill="#ce2939" />
           <rect width="6" height="1" y="2" fill="#477050" />
-        </svg>
-      )
-    case 'ro':
-      return (
-        <svg viewBox="0 0 3 2" className={className} aria-hidden="true">
-          <rect width="3" height="2" fill="#002b7f" />
-          <rect width="2" height="2" x="1" fill="#fcd116" />
-          <rect width="1" height="2" x="2" fill="#ce1126" />
         </svg>
       )
     case 'pl':

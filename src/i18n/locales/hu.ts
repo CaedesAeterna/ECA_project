@@ -50,6 +50,7 @@ const hu = {
       },
     ],
     handbook: 'ECA tanári kézikönyv',
+    curriculum: 'ECA tanterv',
     download: 'Letöltés (PDF)',
   },
   experience: {

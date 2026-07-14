@@ -3,7 +3,7 @@
 #
 # One-time setup:
 #   1. cPanel -> FTP Accounts: create a dedicated account (e.g. deploy@ecaproject.eu)
-#      with Directory = /home/meselig2/ecaproject  (the subdomain document root).
+#      with Directory = /home/meselig2/ecaproject.eu  (the subdomain document root).
 #   2. Repo -> Settings -> Secrets and variables -> Actions, add three secrets:
 #        FTP_SERVER    FTP hostname from cPanel "Configure FTP Client"
 #                      (e.g. ftp.ecaproject.eu) — should match the TLS certificate
@@ -43,7 +43,7 @@ jobs:
           protocol: ftps # explicit FTP over TLS on port 21
           port: 21
           local-dir: ./dist/
-          # A dedicated FTP account jailed to /home/meselig2/ecaproject lands at
-          # its own root, so ./ = the subdomain docroot. If you instead use the
-          # main account (meselig2), change this to ./ecaproject/ .
+          # A dedicated FTP account jailed to /home/meselig2/ecaproject.eu lands
+          # at its own root, so ./ = the subdomain docroot. If you instead use
+          # the main account (meselig2), change this to ./ecaproject.eu/ .
           server-dir: ./

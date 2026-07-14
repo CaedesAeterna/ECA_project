@@ -7,7 +7,6 @@ import Flag from './Flag'
 const LANGUAGES = [
   { code: 'en', label: 'English' },
   { code: 'hu', label: 'Magyar' },
-  { code: 'ro', label: 'Română' },
   { code: 'pl', label: 'Polski' },
 ] as const
 

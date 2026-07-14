@@ -51,6 +51,7 @@ const pl = {
       },
     ],
     handbook: 'Podręcznik nauczyciela EKA',
+    curriculum: 'Program nauczania EKA',
     download: 'Pobierz (PDF)',
   },
   experience: {
