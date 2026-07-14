@@ -13,5 +13,5 @@ rewrites the URLs correctly for the subpath deploy.
   photos:
 
   ```sh
-  rm sample-*.jpg
+  git rm sample-*.jpg
   ```

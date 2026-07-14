@@ -149,7 +149,7 @@ export default function Gallery({ images, labels }: GalleryProps) {
             src={images[openIndex].src}
             alt={images[openIndex].alt}
             onClick={(e) => e.stopPropagation()}
-            className="max-h-[85vh] max-w-full rounded-lg object-contain shadow-2xl"
+            className="max-h-[85vh] w-full max-w-5xl rounded-lg object-contain shadow-2xl"
           />
 
           {images.length > 1 && (

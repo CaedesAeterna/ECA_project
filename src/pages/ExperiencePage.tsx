@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Gallery from '../components/Gallery'
 import meseligetLogo from '../assets/meseliget-logo.png'
+import jaszberenyPhoto from '../assets/ECA-Jaszbereny-768x576.jpg'
 
 // Implementing foundation — language-neutral, so kept out of the locale files.
 const FOUNDATION_URL = 'https://www.meseligetalapitvany.hu'
@@ -60,26 +61,16 @@ export default function ExperiencePage() {
         ))}
       </div>
 
-      {/* Photo caption — a workshop photo can be dropped in above this band later. */}
+      {/* Hero photo; the caption text now serves as its description. */}
       <figure className="mt-10">
-        <div className="flex items-center justify-center gap-2 rounded-2xl bg-blush px-6 py-4 text-center">
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            className="h-5 w-5 shrink-0 text-brand"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M4 7h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z" />
-            <circle cx="12" cy="13" r="3.5" />
-          </svg>
-          <figcaption className="font-display text-base font-semibold text-brand-dark">
-            {t('experience.caption')}
-          </figcaption>
-        </div>
+        <img
+          src={jaszberenyPhoto}
+          alt={t('experience.caption')}
+          className="w-full rounded-2xl shadow-sm"
+        />
+        <figcaption className="mt-3 text-center text-sm italic text-muted">
+          {t('experience.caption')}
+        </figcaption>
       </figure>
 
       {/* Article body. */}
