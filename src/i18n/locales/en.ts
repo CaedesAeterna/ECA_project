@@ -64,6 +64,13 @@ const en = {
       'At a university workshop in Jászberény we explored how learning can be experience, thinking and action all at once.',
     ],
     caption: 'We presented ECA in Jászberény',
+    gallery: {
+      title: 'Gallery',
+      alt: 'Photo from the Jászberény workshop',
+      close: 'Close',
+      prev: 'Previous',
+      next: 'Next',
+    },
     sections: [
       {
         heading: 'A morning that was not a “lesson”',

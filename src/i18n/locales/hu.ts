@@ -59,6 +59,13 @@ const hu = {
       'Egy jászberényi egyetemi workshopon azt kerestük, hogyan lehet a tanulás egyszerre élmény, gondolkodás és cselekvés.',
     ],
     caption: 'Jászberényben bemutattuk az EKA-t',
+    gallery: {
+      title: 'Galéria',
+      alt: 'Fénykép a jászberényi workshopról',
+      close: 'Bezárás',
+      prev: 'Előző',
+      next: 'Következő',
+    },
     sections: [
       {
         heading: 'Egy délelőtt, ami nem „óra” volt',

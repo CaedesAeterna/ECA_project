@@ -1,10 +1,22 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import Gallery from '../components/Gallery'
 import meseligetLogo from '../assets/meseliget-logo.png'
 
 // Implementing foundation — language-neutral, so kept out of the locale files.
 const FOUNDATION_URL = 'https://www.meseligetalapitvany.hu'
 const FOUNDATION_NAME = 'Meseliget Alapítvány'
+
+// Workshop photos: drop image files into src/assets/gallery/experience/ and they
+// are picked up automatically at build time, sorted by filename. See that
+// folder's README for the naming convention.
+const galleryModules = import.meta.glob('../assets/gallery/experience/*.{jpg,jpeg,png,webp}', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>
+const galleryImages = Object.keys(galleryModules)
+  .sort()
+  .map((path) => galleryModules[path])
 
 type Section = {
   heading: string
@@ -107,6 +119,29 @@ export default function ExperiencePage() {
           </section>
         ))}
       </div>
+
+      {/* Workshop gallery — square thumbnail grid + self-built lightbox. Renders
+          only when photos exist in src/assets/gallery/experience/. */}
+      {galleryImages.length > 0 && (
+        <section className="mt-14">
+          <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
+            {t('experience.gallery.title')}
+          </h2>
+          <div className="mt-6">
+            <Gallery
+              images={galleryImages.map((src, i) => ({
+                src,
+                alt: `${t('experience.gallery.alt')} ${i + 1}`,
+              }))}
+              labels={{
+                close: t('experience.gallery.close'),
+                prev: t('experience.gallery.prev'),
+                next: t('experience.gallery.next'),
+              }}
+            />
+          </div>
+        </section>
+      )}
 
       {/* Bottom button: the 3-letter wordmark, back to the home page. */}
       <div className="mt-14 flex justify-center">

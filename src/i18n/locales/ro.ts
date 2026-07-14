@@ -64,6 +64,13 @@ const ro = {
       'La un workshop universitar din Jászberény am căutat cum poate fi învățarea, în același timp, experiență, gândire și acțiune.',
     ],
     caption: 'La Jászberény am prezentat ECA',
+    gallery: {
+      title: 'Galerie',
+      alt: 'Fotografie de la workshopul din Jászberény',
+      close: 'Închide',
+      prev: 'Înapoi',
+      next: 'Înainte',
+    },
     sections: [
       {
         heading: 'O dimineață care nu a fost o „oră”',

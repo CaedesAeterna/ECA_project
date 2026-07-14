@@ -62,6 +62,13 @@ const pl = {
       'Na uniwersyteckim warsztacie w Jászberény szukaliśmy tego, jak nauka może być jednocześnie doświadczeniem, myśleniem i działaniem.',
     ],
     caption: 'W Jászberény zaprezentowaliśmy EKA',
+    gallery: {
+      title: 'Galeria',
+      alt: 'Zdjęcie z warsztatu w Jászberény',
+      close: 'Zamknij',
+      prev: 'Poprzednie',
+      next: 'Następne',
+    },
     sections: [
       {
         heading: 'Przedpołudnie, które nie było „lekcją”',
