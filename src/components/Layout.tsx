@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
+import FoundationCredit from './FoundationCredit'
 import ecaLogo from '../assets/eca-logo.png'
 
 // Top-level navigation, shared by the desktop header and the mobile menu.
@@ -108,9 +109,14 @@ export default function Layout() {
         <Outlet />
       </main>
 
+      {/* Footer: the hairline (border-t) is the divider above the foundation
+          credit, then the copyright line. Shown on every page via the layout. */}
       <footer className="border-t border-ink/10">
-        <div className="mx-auto max-w-6xl px-6 py-6 text-sm text-muted">
-          © {new Date().getFullYear()} {t('brand')} — {t('footer.rights')}
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 px-6 py-12 text-center">
+          <FoundationCredit />
+          <p className="text-sm text-muted">
+            © {new Date().getFullYear()} {t('brand')} — {t('footer.rights')}
+          </p>
         </div>
       </footer>
     </>

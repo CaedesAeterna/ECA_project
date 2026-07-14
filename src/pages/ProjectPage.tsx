@@ -1,11 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import ecaLogo from '../assets/eca-logo.png'
-import meseligetLogo from '../assets/meseliget-logo.png'
-
-// Implementing foundation — language-neutral, so kept out of the locale files.
-const FOUNDATION_URL = 'https://www.meseligetalapitvany.hu'
-const FOUNDATION_NAME = 'Meseliget Alapítvány'
 
 export default function ProjectPage() {
   const { t } = useTranslation()
@@ -36,21 +31,6 @@ export default function ProjectPage() {
         >
           {t('brand')}
         </Link>
-      </div>
-
-      {/* Implementing foundation, shown near the foot of the page. */}
-      <div className="mt-16 flex flex-col items-center gap-3 border-t border-ink/10 pt-10">
-        <a href={FOUNDATION_URL} target="_blank" rel="noreferrer" aria-label={FOUNDATION_NAME}>
-          <img src={meseligetLogo} alt={FOUNDATION_NAME} className="h-16 w-auto sm:h-20" />
-        </a>
-        <a
-          href={FOUNDATION_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="font-semibold text-brand underline underline-offset-4 hover:text-brand-dark"
-        >
-          www.meseligetalapitvany.hu
-        </a>
       </div>
     </section>
   )

@@ -4,8 +4,7 @@ import erasmusLogo from '../assets/erasmus-logo.jpg'
 import meseligetLogo from '../assets/meseliget-logo.png'
 import gedaniaLogo from '../assets/gedania-1922-logo.png'
 
-// Meseliget foundation (language-neutral).
-const FOUNDATION_URL = 'https://www.meseligetalapitvany.hu'
+// Meseliget foundation name, reused as the logo's alt text (language-neutral).
 const FOUNDATION_NAME = 'Meseliget Alapítvány'
 
 export default function PartnersPage() {
@@ -48,21 +47,6 @@ export default function PartnersPage() {
         >
           {t('brand')}
         </Link>
-      </div>
-
-      {/* Foundation credit at the very foot — same block as the project page. */}
-      <div className="mt-16 flex flex-col items-center gap-3 border-t border-ink/10 pt-10">
-        <a href={FOUNDATION_URL} target="_blank" rel="noreferrer" aria-label={FOUNDATION_NAME}>
-          <img src={meseligetLogo} alt={FOUNDATION_NAME} className="h-16 w-auto sm:h-20" />
-        </a>
-        <a
-          href={FOUNDATION_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="font-semibold text-brand underline underline-offset-4 hover:text-brand-dark"
-        >
-          www.meseligetalapitvany.hu
-        </a>
       </div>
     </section>
   )
