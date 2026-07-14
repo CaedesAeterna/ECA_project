@@ -35,7 +35,23 @@ const pl = {
   },
   resources: {
     title: 'Baza wiedzy',
-    body: 'To jest przykładowa treść. Zbieraj tutaj przydatne materiały i wiedzę.',
+    // UWAGA: tłumaczenie wygenerowane automatycznie z języka węgierskiego — do weryfikacji.
+    paragraphs: [
+      'Gdybyśmy chcieli podsumować cel projektu w jednym zdaniu, brzmiałoby ono tak: przygotować nauczycieli, aby potrafili zapewnić uczniom możliwie największą autonomię uczenia się w możliwie najbezpieczniejszej atmosferze nauki. Jest to również ostateczny cel naszego programu nauczania.',
+      'Podręcznik zawiera praktyczne narzędzia do edukacji skoncentrowanej na osobie, opartej na EKA (Emocja–Kognicja–Akcja), na etapie wczesnoszkolnym. Jako nauczyciel znajdziesz tu gry, szablony, konspekty lekcji i listy kontrolne. Poznając te praktyczne narzędzia, przyswajasz jednocześnie postawę pedagogiki skoncentrowanej na osobie, ponieważ EKA właśnie na niej się opiera.',
+    ],
+    items: [
+      {
+        title: 'EKA QUICK MAP',
+        body: 'Szybki, przejrzysty wizualny drogowskaz po całym programie EKA.',
+      },
+      {
+        title: 'Szablon lekcji EKA',
+        body: 'Łatwy w użyciu szablon.',
+      },
+    ],
+    handbook: 'Podręcznik nauczyciela EKA',
+    download: 'Pobierz (PDF)',
   },
   experience: {
     title: 'Relacje',

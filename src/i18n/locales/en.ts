@@ -37,7 +37,23 @@ const en = {
   },
   resources: {
     title: 'Resources',
-    body: 'This is placeholder content. Collect useful materials and knowledge here.',
+    // NOTE: en/ro/pl bodies are AI drafts of the Hungarian source — review before publishing.
+    paragraphs: [
+      'If we had to sum up the project’s goal in a single sentence, it would be this: to prepare teachers so they can give students the greatest possible learning autonomy within the safest possible learning environment. This is also the ultimate goal of our curriculum.',
+      'The handbook contains practical tools for person-centred, ECA-based (Emotion–Cognition–Action) teaching in the lower primary grades. As a teacher, you will find games, templates, lesson outlines and checklists here. As you get to know these practical tools, you also take on the attitude of person-centred pedagogy, since ECA is built on it.',
+    ],
+    items: [
+      {
+        title: 'ECA QUICK MAP',
+        body: 'An at-a-glance visual compass for the whole ECA programme.',
+      },
+      {
+        title: 'ECA lesson template',
+        body: 'An easy-to-use template.',
+      },
+    ],
+    handbook: 'ECA Teacher Handbook',
+    download: 'Download (PDF)',
   },
   experience: {
     title: 'Experience Report',

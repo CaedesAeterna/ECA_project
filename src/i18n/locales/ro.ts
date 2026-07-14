@@ -37,7 +37,23 @@ const ro = {
   },
   resources: {
     title: 'Resurse',
-    body: 'Acesta este conținut temporar. Adună aici materiale utile și cunoștințe.',
+    // NOTĂ: traducere generată automat din maghiară — de verificat înainte de publicare.
+    paragraphs: [
+      'Dacă ar fi să rezumăm scopul proiectului într-o singură frază, aceasta ar suna astfel: să pregătim învățătorii pentru a putea oferi elevilor cea mai mare autonomie de învățare posibilă, într-un climat de învățare cât mai sigur cu putință. Acesta este și scopul final al curriculumului nostru.',
+      'Manualul cuprinde instrumente practice pentru o educație centrată pe persoană, bazată pe ECA (Emoție–Cogniție–Acțiune), la ciclul primar. Ca învățător, vei găsi aici jocuri, șabloane, schițe de lecție și liste de verificare. Pe măsură ce te familiarizezi cu aceste instrumente practice, îți însușești și atitudinea pedagogiei centrate pe persoană, întrucât ECA se bazează pe aceasta.',
+    ],
+    items: [
+      {
+        title: 'ECA QUICK MAP',
+        body: 'O busolă vizuală, ușor de parcurs, pentru întregul program ECA.',
+      },
+      {
+        title: 'Model de lecție ECA',
+        body: 'Un șablon ușor de utilizat.',
+      },
+    ],
+    handbook: 'Manualul profesorului ECA',
+    download: 'Descarcă (PDF)',
   },
   experience: {
     title: 'Impresii',

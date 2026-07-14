@@ -34,7 +34,22 @@ const hu = {
   },
   resources: {
     title: 'Tudásforrás',
-    body: 'Ez helykitöltő tartalom. Gyűjtsd ide a hasznos anyagokat és a tudást.',
+    paragraphs: [
+      'Ha egy mondatban akarnánk összefoglalni a projekt célját, ez így hangzana: felkészíteni a tanítókat, hogy képesek legyenek a lehető legnagyobb tanulási autonómiát biztosítani a diákoknak a lehető legbiztonságosabb tanulási légkörben. Ez a tantervünk végső célja is.',
+      'A kézikönyv gyakorlati eszközöket tartalmaz a személyközpontú, ECA-alapú (Emóció–Kogníció–Akció) oktatáshoz alsó tagozaton. Tanítóként játékokat, sablonokat, óravázlatokat és ellenőrzőlistákat találsz itt. Miközben ezekkel a gyakorlati eszközökkel ismerkedsz, elsajátítod a személyközpontú pedagógia attitűdjét is, hiszen az ECA erre épül.',
+    ],
+    items: [
+      {
+        title: 'ECA QUICK MAP',
+        body: 'Egy gyorsan áttekinthető vizuális iránytű a teljes ECA programhoz.',
+      },
+      {
+        title: 'ECA óraminta',
+        body: 'Egy könnyen használható sablon.',
+      },
+    ],
+    handbook: 'ECA tanári kézikönyv',
+    download: 'Letöltés (PDF)',
   },
   experience: {
     title: 'Élménybeszámoló',
