@@ -13,6 +13,7 @@ const hu = {
     expansion: 'Emóció · Kogníció · Akció',
     tagline: 'A tanulás emberi megközelítése',
     cta: 'Te kipróbálnád?',
+    coverAlt: 'Gyerekek kiscsoportokban, játékosan és boldogan tanulnak a szabadban',
   },
   project: {
     title: 'EKA projekt',

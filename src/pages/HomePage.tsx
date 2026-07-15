@@ -1,14 +1,19 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import HeroIllustration from '../components/HeroIllustration'
 
 export default function HomePage() {
   const { t } = useTranslation()
 
   return (
-    <section className="mx-auto max-w-3xl">
-      {/* Hero — brand wordmark, its spelled-out expansion, a tagline and the CTA.
-          A few photos will be added here later (not yet, per the brief). */}
-      <div className="flex flex-col items-center pt-10 text-center sm:pt-16">
+    <section className="mx-auto max-w-5xl">
+      {/* Cover art — minimalist scene of children learning together outdoors. */}
+      <div className="overflow-hidden rounded-3xl ring-1 ring-ink/5 shadow-sm">
+        <HeroIllustration className="block h-auto w-full" label={t('home.coverAlt')} />
+      </div>
+
+      {/* Hero — brand wordmark, its spelled-out expansion, a tagline and the CTA. */}
+      <div className="mx-auto flex max-w-3xl flex-col items-center pt-10 text-center sm:pt-12">
         <h1 className="font-display text-7xl font-extrabold uppercase tracking-tight text-brand sm:text-8xl">
           {t('brand')}
         </h1>

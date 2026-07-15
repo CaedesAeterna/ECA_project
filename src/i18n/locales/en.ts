@@ -13,6 +13,7 @@ const en = {
     expansion: 'Emotion · Cognition · Action',
     tagline: 'A human approach to learning',
     cta: 'Would you try it?',
+    coverAlt: 'Children learning playfully and happily in small groups outdoors',
   },
   project: {
     title: 'The ECA Project',

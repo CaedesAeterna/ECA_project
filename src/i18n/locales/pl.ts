@@ -12,6 +12,7 @@ const pl = {
     expansion: 'Emocja · Kognicja · Akcja',
     tagline: 'Ludzkie podejście do uczenia się',
     cta: 'Spróbujesz?',
+    coverAlt: 'Dzieci uczące się radośnie w małych grupach na świeżym powietrzu',
   },
   project: {
     title: 'Projekt EKA',
