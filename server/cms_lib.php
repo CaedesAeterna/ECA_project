@@ -271,7 +271,7 @@ function cms_store_upload(array $file, string $destRelDir, string $stem, array $
   }
   // Sniff the real content type, so a renamed script can't slip through.
   $mime = (new finfo(FILEINFO_MIME_TYPE))->file($file['tmp_name']) ?: '';
-  $mimeOk = $ext === 'pdf' ? $mime === 'application/pdf' : str_starts_with($mime, 'image/');
+  $mimeOk = $ext === 'pdf' ? $mime === 'application/pdf' : strpos($mime, 'image/') === 0;
   if (!$mimeOk) {
     throw new RuntimeException('File content is not a valid .' . $ext . ' (' . $mime . ').');
   }

@@ -45,7 +45,7 @@ jobs:
         # them into dist/ lets the single FTPS sync upload them without a second
         # deploy (a second sync to the same server-dir would fight over the
         # shared .ftp-deploy-sync-state.json). media/ is intentionally excluded.
-        run: cp server/cms.php server/cms_lib.php dist/
+        run: cp server/cms.php server/cms_lib.php server/cmsdiag.php dist/
       - name: Upload dist/ to cPanel over FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
