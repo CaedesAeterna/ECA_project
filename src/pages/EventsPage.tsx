@@ -1,25 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Gallery from '../components/Gallery'
-import { eventsByCountry, type Block, type EventEntry } from '../data/events'
-
-// Event photos, grouped by country + event folder (matching EventEntry.folder).
-// Full-resolution originals live in assets/gallery/events/<country>/<folder>/;
-// drop images into the right folder and they attach to that event automatically.
-const imageModules = import.meta.glob(
-  '../assets/gallery/events/**/*.{jpg,JPG,jpeg,JPEG,png,PNG,webp,WEBP}',
-  { eager: true, import: 'default' },
-) as Record<string, string>
-
-const EV_PREFIX = '../assets/gallery/events/'
-const imagesByEvent: Record<string, Record<string, string[]>> = {}
-for (const path of Object.keys(imageModules).sort()) {
-  const segments = path.slice(EV_PREFIX.length).split('/')
-  if (segments.length < 3) continue // <country>/<folder>/<file>
-  const [country, folder] = segments
-  const byFolder = (imagesByEvent[country] ??= {})
-  ;(byFolder[folder] ??= []).push(imageModules[path])
-}
+import { mediaUrl, useManifest, type Block, type EventEntry } from '../lib/manifest'
 
 // Country sections, in display order.
 const COUNTRIES = ['hu', 'pl'] as const
@@ -102,13 +84,11 @@ function Chevron({ className }: { className?: string }) {
 function EventPanel({
   event,
   bodyLang,
-  images,
   galleryLabels,
   galleryAlt,
 }: {
   event: EventEntry
   bodyLang: 'hu' | 'en'
-  images: string[]
   galleryLabels: { close: string; prev: string; next: string }
   galleryAlt: string
 }) {
@@ -123,10 +103,13 @@ function EventPanel({
       </summary>
       <div className="border-t border-ink/10 py-4">
         <div className="space-y-4">{blocks.map(renderBlock)}</div>
-        {images.length > 0 && (
+        {event.images.length > 0 && (
           <div className="mt-6">
             <Gallery
-              images={images.map((src, i) => ({ src, alt: `${title} — ${galleryAlt} ${i + 1}` }))}
+              images={event.images.map((src, i) => ({
+                src: mediaUrl(src),
+                alt: `${title} — ${galleryAlt} ${i + 1}`,
+              }))}
               labels={galleryLabels}
             />
           </div>
@@ -137,11 +120,18 @@ function EventPanel({
 }
 
 // A country section: a big disclosure containing its events (or an empty note).
-function CountrySection({ country, defaultOpen }: { country: Country; defaultOpen?: boolean }) {
+function CountrySection({
+  country,
+  events,
+  defaultOpen,
+}: {
+  country: Country
+  events: EventEntry[]
+  defaultOpen?: boolean
+}) {
   const { t, i18n } = useTranslation()
   const lang = (i18n.resolvedLanguage ?? 'en').slice(0, 2)
   const bodyLang: 'hu' | 'en' = lang === 'hu' ? 'hu' : 'en'
-  const events = eventsByCountry[country]
   const galleryLabels = {
     close: t('events.gallery.close'),
     prev: t('events.gallery.prev'),
@@ -168,12 +158,11 @@ function CountrySection({ country, defaultOpen }: { country: Country; defaultOpe
           <p className="py-4 text-muted">{t('events.empty')}</p>
         ) : (
           <div className="space-y-3">
-            {events.map((event, i) => (
+            {events.map((event) => (
               <EventPanel
-                key={i}
+                key={event.id}
                 event={event}
                 bodyLang={bodyLang}
-                images={imagesByEvent[country]?.[event.folder] ?? []}
                 galleryLabels={galleryLabels}
                 galleryAlt={galleryAlt}
               />
@@ -187,6 +176,7 @@ function CountrySection({ country, defaultOpen }: { country: Country; defaultOpe
 
 export default function EventsPage() {
   const { t } = useTranslation()
+  const { data } = useManifest()
 
   return (
     <section className="mx-auto max-w-3xl">
@@ -197,11 +187,20 @@ export default function EventsPage() {
         {t('events.intro')}
       </p>
 
-      <div className="mt-10 space-y-4">
-        {COUNTRIES.map((country, i) => (
-          <CountrySection key={country} country={country} defaultOpen={i === 0} />
-        ))}
-      </div>
+      {data ? (
+        <div className="mt-10 space-y-4">
+          {COUNTRIES.map((country, i) => (
+            <CountrySection
+              key={country}
+              country={country}
+              events={data.events[country] ?? []}
+              defaultOpen={i === 0}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="mt-10 text-center text-muted">…</p>
+      )}
 
       {/* Bottom button: the 3-letter wordmark, back to the home page. */}
       <div className="mt-14 flex justify-center">

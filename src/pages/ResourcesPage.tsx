@@ -1,64 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { mediaUrl, useManifest, type ResourceDoc } from '../lib/manifest'
 
-// Every resource PDF, discovered at build time and grouped by its folder path
-// "resources/<category>/<lang>/[.../]<file>.pdf". The glob is recursive (**) so
-// nested project folders (e.g. the HU "Paradicsom" lesson series) are included.
-// WordPress is gone, so all of these are bundled and served locally; drop a new
-// file into the right <category>/<lang>/ folder and it is picked up automatically.
-const modules = import.meta.glob('../assets/resources/**/*.pdf', {
-  eager: true,
-  import: 'default',
-}) as Record<string, string>
-
-type Doc = { url: string; label: string; group?: string; download: string }
-
-const PREFIX = '../assets/resources/'
-
-// Turn a filename into a readable label: drop the extension and a leading
-// "ECA"/"Eca" prefix, and show underscores as spaces.
-function cleanLabel(file: string): string {
-  return file
-    .replace(/\.pdf$/i, '')
-    .replace(/^ECA[\s_-]*/i, '')
-    .replace(/_/g, ' ')
-    .trim()
-}
-
-// category -> language -> documents, built once from the glob above.
-const catalogue: Record<string, Record<string, Doc[]>> = {}
-for (const [path, url] of Object.entries(modules)) {
-  const segments = path.slice(PREFIX.length).split('/')
-  if (segments.length < 3) continue // need at least <category>/<lang>/<file>
-  const category = segments[0]
-  const lang = segments[1]
-  const rest = segments.slice(2) // any sub-folders, then the filename
-  const file = rest[rest.length - 1]
-  const parent = rest.length > 1 ? rest[rest.length - 2] : undefined
-  const byLang = (catalogue[category] ??= {})
-  ;(byLang[lang] ??= []).push({
-    url,
-    label: cleanLabel(file),
-    group: parent, // immediate sub-folder, used to keep project lessons together
-    download: file, // keep the author's own filename for the bulk materials
-  })
-}
-
-// Natural sort within each list, grouped items last, so "LP2" precedes "LP13"
-// and the numbered "Paradicsom" lessons stay in order.
-for (const langs of Object.values(catalogue)) {
-  for (const docs of Object.values(langs)) {
-    docs.sort(
-      (a, b) =>
-        (a.group ?? '').localeCompare(b.group ?? '', undefined, { numeric: true }) ||
-        a.label.localeCompare(b.label, undefined, { numeric: true }),
-    )
-  }
-}
-
-function docsFor(category: string, lang: string): Doc[] {
-  return catalogue[category]?.[lang] ?? []
-}
+// Resource files come from the runtime manifest (server/media/manifest.json),
+// already grouped by category -> language and sorted by the seed/CMS. Adding or
+// removing a file is done in the CMS; no rebuild needed.
 
 // Clean download filenames for the two flagship documents, independent of the
 // (messy) source names.
@@ -157,10 +103,10 @@ function DownloadCard({
 }
 
 // A single downloadable file row inside an accordion panel.
-function FileLink({ doc }: { doc: Doc }) {
+function FileLink({ doc }: { doc: ResourceDoc }) {
   return (
     <a
-      href={doc.url}
+      href={mediaUrl(doc.file)}
       download={doc.download}
       className="flex items-center gap-3 rounded-lg px-3 py-2 text-ink transition-colors hover:bg-brand/10"
     >
@@ -171,7 +117,7 @@ function FileLink({ doc }: { doc: Doc }) {
             {doc.group}
           </span>
         )}
-        <span className="truncate">{doc.label}</span>
+        <span className="truncate">{doc.title}</span>
       </span>
       <DownloadArrow className="h-4 w-4 shrink-0 text-muted" />
     </a>
@@ -180,7 +126,7 @@ function FileLink({ doc }: { doc: Doc }) {
 
 // A collapsible panel listing every file of one material type (native <details>,
 // so it works without JS and is keyboard-accessible).
-function MaterialPanel({ title, docs }: { title: string; docs: Doc[] }) {
+function MaterialPanel({ title, docs }: { title: string; docs: ResourceDoc[] }) {
   return (
     <details className="group rounded-2xl border border-ink/10 bg-white/60 px-5 open:bg-white">
       <summary className="flex cursor-pointer list-none items-center gap-3 py-4 font-display font-bold text-ink [&::-webkit-details-marker]:hidden">
@@ -203,6 +149,7 @@ function MaterialPanel({ title, docs }: { title: string; docs: Doc[] }) {
 
 export default function ResourcesPage() {
   const { t, i18n } = useTranslation()
+  const { data } = useManifest()
 
   // Body copy and the two feature cards are stored in the locale files.
   const paragraphs = t('resources.paragraphs', { returnObjects: true }) as string[]
@@ -215,6 +162,8 @@ export default function ResourcesPage() {
   // for the two flagship documents. The extra materials are language-specific:
   // a panel simply doesn't appear if that language has no files yet.
   const lang = (i18n.resolvedLanguage ?? 'en').slice(0, 2)
+  const resources = data?.resources ?? {}
+  const docsFor = (cat: string, l: string): ResourceDoc[] => resources[cat]?.[l] ?? []
   const handbook = docsFor('handbook', lang)[0] ?? docsFor('handbook', 'en')[0]
   const curriculum = docsFor('curriculum', lang)[0] ?? docsFor('curriculum', 'en')[0]
   const names = DOWNLOAD_NAME[lang] ?? DOWNLOAD_NAME.en
@@ -252,7 +201,7 @@ export default function ResourcesPage() {
       <div className="mt-10 grid gap-5 sm:grid-cols-2">
         {handbook && (
           <DownloadCard
-            href={handbook.url}
+            href={mediaUrl(handbook.file)}
             download={names.handbook}
             title={t('resources.handbook')}
             subtitle={t('resources.download')}
@@ -260,7 +209,7 @@ export default function ResourcesPage() {
         )}
         {curriculum && (
           <DownloadCard
-            href={curriculum.url}
+            href={mediaUrl(curriculum.file)}
             download={names.curriculum}
             title={t('resources.curriculum')}
             subtitle={t('resources.download')}
