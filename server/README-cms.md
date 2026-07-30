@@ -26,20 +26,26 @@ docroot (/home/<account>/ecaproject.eu)
 - PHP **8.0+** (cPanel → *MultiPHP Manager* if you need to bump the domain).
 - The `fileinfo` extension (on by default) — used to MIME-check uploads.
 
-## One-time deployment
-1. Upload the **contents of this `server/` folder** to the site's document root
-   (`/home/<account>/ecaproject.eu`) so you end up with `cms.php`, `cms_lib.php`
-   and `media/` sitting next to `index.html`. FileZilla drag-and-drop is fine.
-   - ⚠️ Upload `media/` **before** (or together with) the next app deploy —
-     otherwise the Resources/Events pages have nothing to fetch and show empty.
-2. Open `https://ecaproject.eu/cms.php` in a browser. On first visit it shows a
-   **setup** page — pick a username + password. Do this **immediately** after
-   upload (setup self-disables once the config exists).
-   - Setup writes the admin config to `eca-cms-config.php` in the folder *above*
-     the web root when possible (not web-accessible); otherwise to `config.php`
-     next to `cms.php`. If it can't write either, it prints the file for you to
-     create by hand.
-3. Log in and manage content. Done.
+## Deployment — all from the repo (no manual FTP)
+Everything ships through GitHub Actions; you never drag files by hand.
+
+1. **Push to `main`.** `deploy-cpanel.yml` builds the app **and** bundles
+   `cms.php` + `cms_lib.php` into the same FTPS upload, so the CMS endpoint lands
+   at `https://ecaproject.eu/cms.php` automatically.
+2. **Seed the media once.** In the repo's **Actions** tab, run the
+   **“Seed CMS media”** workflow (`seed-media.yml`, manual *Run workflow*). It
+   uploads `server/media/` (the initial PDFs, galleries and `manifest.json`) to
+   `<docroot>/media/`. Do this right after the first push — until it runs, the
+   Resources/Events pages have nothing to fetch and show empty.
+3. **Create the admin.** Open `https://ecaproject.eu/cms.php`; the first visit
+   shows a **setup** page — pick a username + password (do it immediately; setup
+   self-disables once the config exists). Setup writes the admin config to
+   `eca-cms-config.php` *above* the web root when possible (not web-accessible),
+   else `config.php` next to `cms.php`; if it can’t write either it prints the
+   file for you to paste.
+
+From then on: **content is edited in the CMS** (never re-run the seed), and
+**code/app changes deploy by pushing** to `main`.
 
 ## Using it
 - **Resources**: per category (Handbook, Curriculum, Lesson plans, Worksheets,
@@ -56,10 +62,11 @@ docroot (/home/<account>/ecaproject.eu)
   - a blank line starts a new paragraph.
 
 ## How this coexists with the app deploy
-The GitHub Actions workflow uploads **only `dist/`** and tracks only its own
-files, so it never touches `cms.php` or `media/`. Deploying the app and editing
-content are fully independent. To change the CMS code later, re-upload `cms.php`
-/ `cms_lib.php` manually.
+The push workflow uploads `dist/` **plus `cms.php`/`cms_lib.php`**, and tracks
+only its own files (`.ftp-deploy-sync-state.json`), so it **never touches
+`media/`** — your CMS uploads and edited `manifest.json` survive every redeploy.
+The media seed is a separate manual workflow with its own state file, so the two
+never conflict. Changing the CMS code = just push; content = edit in the CMS.
 
 ## Security notes
 - HTTPS only (the cert on ecaproject.eu is valid); session cookie is HttpOnly +

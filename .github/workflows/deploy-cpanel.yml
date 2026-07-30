@@ -1,5 +1,11 @@
-# Build the Vite site and upload dist/ to the cPanel host over FTPS (encrypted,
-# TLS 1.3 — verified on this server) on every push to `main`.
+# Build the Vite site and upload it to the cPanel host over FTPS (encrypted,
+# TLS 1.3 — verified on this server) on every push to `main`. The CMS endpoint
+# (cms.php + cms_lib.php) is bundled into the same upload so it deploys too.
+#
+# The CMS-owned media/ tree is deliberately NOT touched here — it is seeded once
+# by the separate `seed-media.yml` workflow, then owned by the CMS on the server
+# (uploads + edited manifest.json must survive redeploys). This deploy only ever
+# manages its own files, so it never deletes or overwrites media/.
 #
 # One-time setup:
 #   1. cPanel -> FTP Accounts: create a dedicated account (e.g. deploy@ecaproject.eu)
@@ -34,6 +40,12 @@ jobs:
         run: yarn install --immutable
       - name: Build
         run: yarn build
+      - name: Bundle the CMS endpoint next to the app
+        # cms.php / cms_lib.php live at the docroot root (URL: /cms.php). Copying
+        # them into dist/ lets the single FTPS sync upload them without a second
+        # deploy (a second sync to the same server-dir would fight over the
+        # shared .ftp-deploy-sync-state.json). media/ is intentionally excluded.
+        run: cp server/cms.php server/cms_lib.php dist/
       - name: Upload dist/ to cPanel over FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

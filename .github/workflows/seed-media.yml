@@ -1,0 +1,38 @@
+# One-time (manual) seed of the CMS-owned media tree to the cPanel host.
+#
+# Run this ONCE, from the Actions tab -> "Seed CMS media" -> "Run workflow",
+# right after the first deploy. It uploads server/media/ (the initial PDFs,
+# event galleries and manifest.json) to  <docroot>/media/ .
+#
+# After that, the CMS owns media/ on the server: it edits manifest.json and adds
+# or removes files there. Do NOT run this again unless you deliberately want to
+# reset content back to the repo's committed seed — it uploads the repo copy.
+# It is safe against accidental data loss on a re-run (it only re-uploads files
+# that changed in the repo and never deletes CMS-added files), but the repo's
+# manifest.json is a stale snapshot, so treat this as a bootstrap, not a sync.
+#
+# Uses the same FTP secrets as deploy-cpanel.yml. Its own sync-state file lives
+# inside media/, separate from the app deploy's, so the two never conflict.
+name: Seed CMS media
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: cpanel-seed-media
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload server/media/ to <docroot>/media/ over FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./server/media/
+          server-dir: ./media/
