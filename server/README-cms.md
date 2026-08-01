@@ -68,6 +68,19 @@ only its own files (`.ftp-deploy-sync-state.json`), so it **never touches
 The media seed is a separate manual workflow with its own state file, so the two
 never conflict. Changing the CMS code = just push; content = edit in the CMS.
 
+## Content backup: CMS uploads flow back into the repo
+`sync-content.yml` mirrors the server's `media/` **back into the repo** so every
+file uploaded/edited in the CMS becomes a versioned git commit (a backup + history
+— the live site still serves from the server, not from the repo). It runs
+roughly every 10 minutes (only committing when something actually changed) and on
+demand via **Actions → “Sync content from server” → Run workflow**.
+
+It is **tokenless on the host**: the commit is made by the workflow's built-in
+`GITHUB_TOKEN`, and it reuses the existing FTP secrets to pull. If the server has
+no `manifest.json` yet (media not seeded), it safely skips — an empty remote can
+never wipe the repo. Content-only commits are ignored by `deploy-cpanel.yml`
+(`paths-ignore: server/media/**`), so they don't redeploy the app.
+
 ## Security notes
 - HTTPS only (the cert on ecaproject.eu is valid); session cookie is HttpOnly +
   Secure + SameSite. All mutations are CSRF-protected.

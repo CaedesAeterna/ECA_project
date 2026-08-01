@@ -20,6 +20,10 @@ name: Deploy to cPanel (FTPS)
 on:
   push:
     branches: [main]
+    # Content-only commits (the CMS->repo sync in sync-content.yml) touch just
+    # server/media/** — don't redeploy the app for those.
+    paths-ignore:
+      - 'server/media/**'
   workflow_dispatch:
 
 concurrency:

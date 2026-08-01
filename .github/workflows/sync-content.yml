@@ -1,0 +1,70 @@
+# Mirror the CMS-owned media/ tree from the cPanel host back INTO the repo, so
+# every file uploaded/edited through the CMS becomes a versioned, backed-up
+# commit. Tokenless: the commit uses the built-in GITHUB_TOKEN — the host holds
+# no GitHub secret. Runs every 10 min (but only commits when something actually
+# changed) and on demand via the "Run workflow" button.
+#
+# The live site serves media/ from the SERVER, so this repo copy is a backup /
+# version history, not the serving path — a few minutes of lag is fine. These
+# content-only commits are ignored by deploy-cpanel.yml (paths-ignore), so they
+# never redeploy the app.
+name: Sync content from server
+
+on:
+  schedule:
+    - cron: '*/10 * * * *' # GitHub cron is best-effort; treat as "roughly every 10 min"
+  workflow_dispatch:
+
+concurrency:
+  group: content-sync
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+      - name: Mirror media/ from the host and commit any changes
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          set -euo pipefail
+          COMMON="set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate yes; set ftp:passive-mode true; set ftp:prefer-epsv false; set net:max-retries 2; set net:timeout 25"
+          CONNECT="open -u \"$FTP_USERNAME\",\"$FTP_PASSWORD\" \"$FTP_SERVER\""
+
+          # 1) Cheap change check on the tiny manifest before pulling ~40 MB.
+          #    If the server has NO manifest, it isn't seeded yet — skip entirely,
+          #    so an empty remote can never wipe the repo's committed media.
+          if ! lftp -c "$COMMON; $CONNECT; get /media/manifest.json -o remote-manifest.json"; then
+            echo "No manifest.json on the server (media/ not seeded yet?). Skipping — nothing to mirror."
+            exit 0
+          fi
+          if cmp -s remote-manifest.json server/media/manifest.json; then
+            echo "Server content unchanged since last sync. Nothing to do."
+            rm -f remote-manifest.json
+            exit 0
+          fi
+          rm -f remote-manifest.json
+
+          # 2) Incremental mirror: server /media/ -> repo server/media/ .
+          #    --delete propagates files removed in the CMS.
+          lftp -c "$COMMON; $CONNECT; mirror --delete --verbose /media/ server/media/"
+
+          # 3) Commit + push if anything changed (tokenless: default GITHUB_TOKEN).
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add server/media
+          if git diff --cached --quiet; then
+            echo "Mirror produced no file changes."
+            exit 0
+          fi
+          git commit -m "content: sync from CMS ($(date -u +%FT%TZ))"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+          git push
