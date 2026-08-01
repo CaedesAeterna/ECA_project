@@ -149,10 +149,17 @@ function manifest_save(array $m): void {
     $m,
     JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
   );
+  // Never overwrite the manifest with garbage: bail if encoding failed (e.g. a
+  // malformed-UTF-8 paste) rather than writing a truncated/false value.
+  if ($json === false) {
+    throw new RuntimeException('Could not encode content (' . json_last_error_msg() . '); nothing was saved.');
+  }
   $path = cms_manifest_path();
   $tmp = $path . '.tmp';
-  file_put_contents($tmp, $json . "\n", LOCK_EX);
-  rename($tmp, $path);
+  if (file_put_contents($tmp, $json . "\n", LOCK_EX) === false || !rename($tmp, $path)) {
+    @unlink($tmp);
+    throw new RuntimeException('Could not write manifest.json — is media/ writable?');
+  }
 }
 
 // ---------------------------------------------------------------------------

@@ -198,9 +198,9 @@ function handle_action(string $do): void {
     }
     case 'event_delete': {
       $country = $_POST['country'] ?? '';
+      if (!in_array($country, CMS_COUNTRIES, true)) throw new RuntimeException('Unknown country.');
       $id = $_POST['id'] ?? '';
-      $list = &$m['events'][$country] ?? null;
-      if ($list === null) throw new RuntimeException('Unknown country.');
+      $list = &$m['events'][$country];
       $idx = event_index($list, $id);
       if ($idx !== null) {
         cms_rmtree('gallery/events/' . $country . '/' . $id);
@@ -213,6 +213,7 @@ function handle_action(string $do): void {
     }
     case 'image_upload': {
       $country = $_POST['country'] ?? '';
+      if (!in_array($country, CMS_COUNTRIES, true)) throw new RuntimeException('Unknown country.');
       $id = $_POST['id'] ?? '';
       $list = &$m['events'][$country];
       $idx = event_index($list, $id);
@@ -240,6 +241,7 @@ function handle_action(string $do): void {
     }
     case 'image_delete': {
       $country = $_POST['country'] ?? '';
+      if (!in_array($country, CMS_COUNTRIES, true)) throw new RuntimeException('Unknown country.');
       $id = $_POST['id'] ?? '';
       $file = $_POST['file'] ?? '';
       $list = &$m['events'][$country];
