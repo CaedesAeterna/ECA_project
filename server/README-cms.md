@@ -23,7 +23,9 @@ docroot (/home/<account>/ecaproject.eu)
 ```
 
 ## Requirements
-- PHP **8.0+** (cPanel → *MultiPHP Manager* if you need to bump the domain).
+- PHP **7.4 – 8.3** (verified on both ends). 7.4 is the floor — the code uses arrow
+  functions, `??=` and the array form of `session_set_cookie_params`. No database
+  or `mysqli` needed. Set the domain's version in cPanel → *MultiPHP Manager*.
 - The `fileinfo` extension (on by default) — used to MIME-check uploads.
 
 ## Deployment — all from the repo (no manual FTP)
