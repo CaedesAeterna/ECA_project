@@ -466,5 +466,8 @@
       }
     ],
     "pl": []
+  },
+  "theme": {
+    "background": null
   }
 }

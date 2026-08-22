@@ -255,6 +255,28 @@ function handle_action(string $do): void {
       flash_set('Image removed.');
       break;
     }
+    // ---- Appearance --------------------------------------------------------
+    case 'theme_save': {
+      // The free-text hex wins when filled in; otherwise take the colour picker.
+      $hex = cms_hex_color($_POST['hex'] ?? '') ?? cms_hex_color($_POST['background'] ?? '');
+      if (($_POST['hex'] ?? '') !== '' && cms_hex_color($_POST['hex']) === null) {
+        throw new RuntimeException('Not a valid colour — use the form #rrggbb (e.g. #fce9e3).');
+      }
+      if (!is_array($m['theme'] ?? null)) $m['theme'] = [];
+      $m['theme']['background'] = $hex;
+      manifest_save($m);
+      flash_set($hex ? ('Background colour set to ' . $hex . '.') : 'Background colour saved.');
+      break;
+    }
+    case 'theme_reset': {
+      // An explicit null (rather than a missing key) also clears the colour for
+      // visitors who cached the previous one.
+      if (!is_array($m['theme'] ?? null)) $m['theme'] = [];
+      $m['theme']['background'] = null;
+      manifest_save($m);
+      flash_set('Background colour reset to the default.');
+      break;
+    }
     default:
       throw new RuntimeException('Unknown action.');
   }
@@ -340,7 +362,198 @@ function render_dashboard(): void {
     echo '</details>';
     echo '</section>';
   }
+
+  render_theme_section((array) ($m['theme'] ?? []));
   render_foot();
+}
+
+// ---- Appearance -----------------------------------------------------------
+function render_theme_section(array $theme): void {
+  $current = cms_hex_color($theme['background'] ?? null);
+  $shown = $current ?? CMS_DEFAULT_BG;
+  echo '<h2>Appearance — background colour</h2>';
+  echo '<p class="muted">The page background for the whole site. Pick a colour, watch the preview, then save — visitors get it on their next page load, with no rebuild or redeploy.</p>';
+  echo '<section class="card">';
+  echo '<form method="post" id="themeForm" data-current="' . h($shown) . '">' . csrf_field();
+  echo '<input type="hidden" name="do" value="theme_save">';
+  echo '<div class="th-grid">';
+
+  // Live preview: a small mock of the real page.
+  echo '<div>';
+  echo '<div class="th-label">Preview</div>';
+  echo '<div class="th-preview" id="pvPage">';
+  echo   '<div class="pv-bar"><span class="pv-logo">ECA</span><span class="pv-nav"><i class="pv-pill"></i><i></i><i></i><i></i></span></div>';
+  echo   '<div class="pv-hero">Emotion · Cognition · Action</div>';
+  echo   '<div class="pv-body">';
+  echo     '<div class="pv-card"><b>White content card</b><span>Body text sits on this white surface.</span><span class="pv-btn">Download</span></div>';
+  echo     '<div class="pv-card"><b>Resources</b><span>Handbook · Curriculum · Lesson plans</span></div>';
+  echo   '</div>';
+  echo   '<div class="pv-foot"></div>';
+  echo '</div>';
+  echo '</div>';
+
+  // Controls.
+  echo '<div class="th-controls">';
+  echo '<div class="th-label">Colour</div>';
+  echo '<div class="th-row">';
+  echo   '<span class="swatch" id="thBig" style="background:' . h($shown) . '"></span>';
+  echo   '<div class="th-fields">';
+  echo     '<label class="inline-lbl">Hex<input name="hex" id="thHex" value="' . h($shown) . '" size="9" maxlength="7" spellcheck="false"></label>';
+  echo     '<label class="inline-lbl">Picker<input type="color" name="background" id="thPick" value="' . h($shown) . '"></label>';
+  echo     '<button type="button" class="ghost small" id="thDrop" hidden>Pick from screen</button>';
+  echo   '</div>';
+  echo '</div>';
+
+  echo '<div class="th-label">RGB</div><div class="th-sliders">';
+  foreach ([['R', 255], ['G', 255], ['B', 255]] as [$k, $max]) {
+    echo '<div class="th-slider"><span>' . $k . '</span>';
+    echo '<input type="range" min="0" max="' . $max . '" id="th' . $k . '">';
+    echo '<output id="th' . $k . 'v">0</output></div>';
+  }
+  echo '</div>';
+
+  echo '<div class="th-label">HSL</div><div class="th-sliders">';
+  foreach ([['H', 360], ['S', 100], ['L', 100]] as [$k, $max]) {
+    echo '<div class="th-slider"><span>' . $k . '</span>';
+    echo '<input type="range" min="0" max="' . $max . '" id="th' . $k . '">';
+    echo '<output id="th' . $k . 'v">0</output></div>';
+  }
+  echo '</div>';
+
+  echo '<div class="th-label">Presets</div><div class="th-swatches">';
+  foreach (CMS_SWATCHES as [$hex, $name]) {
+    echo '<button type="button" class="sw" data-c="' . $hex . '" title="' . h($name) . ' — ' . $hex . '" style="background:' . $hex . '"></button>';
+  }
+  echo '</div>';
+
+  echo '<p class="th-status" id="thStatus"></p>';
+  echo '<div class="th-actions">';
+  echo   '<button>Save colour</button>';
+  echo   '<button type="button" class="ghost" id="thRevert">Undo changes</button>';
+  echo '</div>';
+  echo '</div>'; // .th-controls
+
+  echo '</div>'; // .th-grid
+  echo '</form>';
+
+  if ($current) {
+    echo '<form method="post" class="danger-row">' . csrf_field();
+    echo '<input type="hidden" name="do" value="theme_reset">';
+    echo '<button class="link">Reset to the default (' . CMS_DEFAULT_BG . ')</button></form>';
+  } else {
+    echo '<p class="muted" style="margin:.6rem 0 0">Currently using the built-in default (' . CMS_DEFAULT_BG . ').</p>';
+  }
+  echo '</section>';
+  echo '<script>' . cms_theme_js() . '</script>';
+}
+
+// Client-side wiring for the colour picker: keeps hex / native picker / RGB /
+// HSL / swatches in sync and repaints the preview. Plain vanilla JS — the CMS
+// loads no external assets. Without JS the hex field and the native colour
+// input still submit a valid colour on their own.
+function cms_theme_js(): string {
+  return <<<'JS'
+(function () {
+  var form = document.getElementById('themeForm');
+  if (!form) return;
+  var START = form.getAttribute('data-current');
+  var $ = function (id) { return document.getElementById(id); };
+  var hexIn = $('thHex'), pick = $('thPick'), big = $('thBig'),
+      page = $('pvPage'), status = $('thStatus');
+  var rgbIds = ['thR', 'thG', 'thB'], hslIds = ['thH', 'thS', 'thL'];
+  var lock = false; // guards the two-way sync
+
+  function clamp(v, hi) { return Math.max(0, Math.min(hi, v)); }
+  function toHex(r, g, b) {
+    return '#' + [r, g, b].map(function (v) {
+      return clamp(Math.round(v), 255).toString(16).padStart(2, '0');
+    }).join('');
+  }
+  function parse(v) {
+    v = String(v || '').trim().toLowerCase();
+    if (/^[0-9a-f]{3}$/.test(v) || /^[0-9a-f]{6}$/.test(v)) v = '#' + v;
+    if (/^#[0-9a-f]{3}$/.test(v)) v = '#' + v[1] + v[1] + v[2] + v[2] + v[3] + v[3];
+    return /^#[0-9a-f]{6}$/.test(v) ? v : null;
+  }
+  function toRgb(hex) {
+    var n = parseInt(hex.slice(1), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+  function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    var mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn, h = 0, s = 0, l = (mx + mn) / 2;
+    if (d) {
+      s = d / (1 - Math.abs(2 * l - 1));
+      h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+      h *= 60; if (h < 0) h += 360;
+    }
+    return [Math.round(h), Math.round(s * 100), Math.round(l * 100)];
+  }
+  function hslToRgb(h, s, l) {
+    s /= 100; l /= 100;
+    var c = (1 - Math.abs(2 * l - 1)) * s, x = c * (1 - Math.abs(((h / 60) % 2) - 1)), m = l - c / 2;
+    var t = h < 60 ? [c, x, 0] : h < 120 ? [x, c, 0] : h < 180 ? [0, c, x]
+          : h < 240 ? [0, x, c] : h < 300 ? [x, 0, c] : [c, 0, x];
+    return [(t[0] + m) * 255, (t[1] + m) * 255, (t[2] + m) * 255];
+  }
+
+  // Paint everything from one colour. `from` names the control that changed, so
+  // it is not written back to (which would fight the user's typing/dragging).
+  function apply(hex, from) {
+    if (lock) return;
+    lock = true;
+    var rgb = toRgb(hex), hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
+
+    if (from !== 'hex') hexIn.value = hex;
+    if (from !== 'pick') pick.value = hex;
+    if (from !== 'rgb') rgbIds.forEach(function (id, i) { $(id).value = rgb[i]; });
+    if (from !== 'hsl') hslIds.forEach(function (id, i) { $(id).value = hsl[i]; });
+    rgbIds.forEach(function (id, i) { $(id + 'v').value = rgb[i]; });
+    hslIds.forEach(function (id, i) { $(id + 'v').value = hsl[i] + (i ? '%' : '°'); });
+
+    big.style.background = hex;
+    page.style.background = hex;
+    hexIn.classList.remove('bad');
+    status.textContent = hex + (hex.toLowerCase() === String(START).toLowerCase()
+      ? '  ·  saved' : '  ·  not saved yet');
+    lock = false;
+  }
+
+  hexIn.addEventListener('input', function () {
+    var v = parse(hexIn.value);
+    if (v) apply(v, 'hex'); else hexIn.classList.add('bad');
+  });
+  hexIn.addEventListener('blur', function () { apply(parse(hexIn.value) || START, 'none'); });
+  pick.addEventListener('input', function () { apply(parse(pick.value) || START, 'pick'); });
+  rgbIds.forEach(function (id) {
+    $(id).addEventListener('input', function () {
+      apply(toHex(+$('thR').value, +$('thG').value, +$('thB').value), 'rgb');
+    });
+  });
+  hslIds.forEach(function (id) {
+    $(id).addEventListener('input', function () {
+      apply(toHex.apply(null, hslToRgb(+$('thH').value, +$('thS').value, +$('thL').value)), 'hsl');
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.th-swatches .sw'), function (b) {
+    b.addEventListener('click', function () { apply(b.getAttribute('data-c'), 'none'); });
+  });
+  $('thRevert').addEventListener('click', function () { apply(START, 'none'); });
+
+  // Chrome's screen eyedropper, when available.
+  if (window.EyeDropper) {
+    var drop = $('thDrop');
+    drop.hidden = false;
+    drop.addEventListener('click', function () {
+      new window.EyeDropper().open().then(function (r) {
+        var v = parse(r.sRGBHex); if (v) apply(v, 'none');
+      }).catch(function () {});
+    });
+  }
+
+  apply(parse(START) || '#fce9e3', 'none');
+})();
+JS;
 }
 
 function render_event_editor(string $country, array $e): void {
@@ -430,6 +643,42 @@ function cms_css(): string {
   .thumbs{display:flex;flex-wrap:wrap;gap:.6rem}
   .thumb{width:130px}.thumb img{width:130px;height:90px;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
   .danger-row{margin-top:.6rem}
+  .swatch{width:54px;height:54px;border-radius:10px;border:1px solid var(--line);display:inline-block;flex:0 0 auto}
+  .inline-lbl{display:inline-flex;align-items:center;gap:.4rem;margin:0;white-space:nowrap;font-size:.9rem;font-weight:600}
+  .inline-lbl input{width:auto}
+  input[type=color]{padding:.1rem;height:2.2rem;width:3.2rem;cursor:pointer}
+  button.small{padding:.3rem .6rem;font-size:.85rem}
+  .th-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2rem;align-items:start}
+  @media(max-width:820px){.th-grid{grid-template-columns:1fr}}
+  .th-label{font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:.9rem 0 .35rem}
+  .th-grid .th-label:first-child{margin-top:0}
+  .th-row{display:flex;gap:.8rem;align-items:center}
+  .th-fields{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+  #thHex{font-family:ui-monospace,monospace;text-transform:lowercase}
+  #thHex.bad{border-color:#c0392b;background:#fdecea}
+  .th-sliders{display:grid;gap:.3rem}
+  .th-slider{display:grid;grid-template-columns:1.1rem 1fr 3rem;align-items:center;gap:.5rem}
+  .th-slider span{font-weight:700;color:var(--muted);font-size:.85rem}
+  .th-slider input[type=range]{width:100%;accent-color:var(--brand)}
+  .th-slider output{font-family:ui-monospace,monospace;font-size:.82rem;color:var(--muted);text-align:right}
+  .th-swatches{display:flex;flex-wrap:wrap;gap:.4rem}
+  .th-swatches .sw{width:30px;height:30px;padding:0;border-radius:8px;border:1px solid var(--line);cursor:pointer}
+  .th-swatches .sw:hover{outline:2px solid var(--brand);outline-offset:1px}
+  .th-status{font-family:ui-monospace,monospace;font-size:.82rem;color:var(--muted);margin:.9rem 0 .5rem}
+  .th-actions{display:flex;gap:.6rem;align-items:center}
+  /* Mini mock of the real page, so the colour can be judged in context. */
+  .th-preview{border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:.72rem;line-height:1.35}
+  .pv-bar{background:#fff;border-bottom:1px solid var(--line);padding:.45rem .6rem;display:flex;justify-content:space-between;align-items:center}
+  .pv-logo{font-weight:800;color:#e0765a;letter-spacing:.06em}
+  .pv-nav{display:flex;gap:.3rem;align-items:center}
+  .pv-nav i{width:22px;height:6px;border-radius:99px;background:#e2e2e2;display:block}
+  .pv-nav i.pv-pill{background:#e0765a;width:30px}
+  .pv-hero{background:#fff;text-align:center;color:#e0765a;font-weight:700;font-size:.95rem;padding:.9rem 0 1.1rem;border-bottom:1px solid #f0f0f0}
+  .pv-body{padding:.7rem;display:grid;gap:.55rem}
+  .pv-card{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:9px;padding:.6rem .7rem;display:grid;gap:.25rem}
+  .pv-card span{color:#6b6b6b}
+  .pv-btn{justify-self:start;background:#e0765a;color:#fff;font-weight:700;border-radius:99px;padding:.22rem .7rem;margin-top:.2rem}
+  .pv-foot{background:#333;height:26px}
   pre{background:#fff;border:1px solid var(--line);border-radius:8px;padding:.8rem;overflow:auto}
   CSS;
 }

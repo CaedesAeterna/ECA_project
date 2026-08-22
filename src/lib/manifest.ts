@@ -2,6 +2,7 @@
 // host; the site fetches it at runtime (no rebuild needed when content changes).
 // In dev a Vite middleware serves /media from server/media (see vite.config.ts).
 import { useEffect, useState } from 'react'
+import type { Theme } from './theme'
 
 // A content block for an event report: paragraph, lead paragraph, sub-heading,
 // bullet list, or a signature line. Bodies are per language; PL falls back to EN.
@@ -32,6 +33,8 @@ export type Manifest = {
   updatedAt: string
   resources: Record<string, Record<string, ResourceDoc[]>>
   events: { hu: EventEntry[]; pl: EventEntry[] }
+  /** Look & feel set in the CMS (currently the page background colour). */
+  theme?: Theme
 }
 
 // Absolute URL for a media-relative path, resolved against the document base so

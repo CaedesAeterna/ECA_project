@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="ECA — multilingual presentation site (placeholder)." />
     <title>ECA</title>
+    <script>
+      // Paint the last known background before first paint, so a custom colour
+      // never flashes the default first. The real value comes from the CMS
+      // manifest a moment later (see src/lib/theme.ts).
+      try {
+        var c = localStorage.getItem('eca:bg');
+        if (/^#[0-9a-f]{6}$/i.test(c || '')) {
+          document.documentElement.style.setProperty('--color-blush', c);
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

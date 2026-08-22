@@ -127,6 +127,7 @@ function manifest_default(): array {
     'updatedAt' => gmdate('c'),
     'resources' => new stdClass(),
     'events' => ['hu' => [], 'pl' => []],
+    'theme' => new stdClass(),
   ];
 }
 
@@ -137,6 +138,7 @@ function manifest_load(): array {
   if (!is_array($data)) return manifest_default();
   $data['resources'] ??= [];
   $data['events'] ??= ['hu' => [], 'pl' => []];
+  $data['theme'] ??= [];
   return $data;
 }
 
@@ -145,6 +147,11 @@ function manifest_save(array $m): void {
   $m['updatedAt'] = gmdate('c');
   $m['version'] = $m['version'] ?? 1;
   if (empty($m['resources'])) $m['resources'] = new stdClass();
+  // An empty theme must encode as {} (an object), not [] — the site reads it as
+  // a map. Keys with a null value are meaningful: they mean "use the default".
+  if (empty(array_filter((array) ($m['theme'] ?? []), fn($v) => $v !== null))) {
+    $m['theme'] = (object) (array) ($m['theme'] ?? []);
+  }
   $json = json_encode(
     $m,
     JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
@@ -297,6 +304,29 @@ function cms_store_upload(array $file, string $destRelDir, string $stem, array $
   }
   return $rel;
 }
+
+// Normalise a colour to "#rrggbb", or null when it is not a hex colour.
+function cms_hex_color(?string $value): ?string {
+  $v = strtolower(trim((string) $value));
+  if (preg_match('/^#[0-9a-f]{6}$/', $v)) return $v;
+  if (preg_match('/^#[0-9a-f]{3}$/', $v)) {
+    return '#' . $v[1] . $v[1] . $v[2] . $v[2] . $v[3] . $v[3];
+  }
+  return null;
+}
+
+// The page background baked into src/index.css (--color-blush).
+const CMS_DEFAULT_BG = '#fce9e3';
+
+// Ready-made backgrounds offered in the CMS picker, chosen to sit well with the
+// site's coral/blush palette. Defined here (not in cms.php) because a top-level
+// const is not hoisted — cms.php renders before its own bottom half runs.
+const CMS_SWATCHES = [
+  ['#fce9e3', 'Default blush'], ['#fdf3ee', 'Pale blush'], ['#fbf6f3', 'Warm off-white'],
+  ['#fdf0e6', 'Sand'],          ['#fdf6ec', 'Cream'],      ['#f7efe6', 'Linen'],
+  ['#eef4ff', 'Sky'],           ['#eaf7ef', 'Soft green'], ['#e6e9ff', 'Lavender'],
+  ['#f5f5f5', 'Light grey'],    ['#ffffff', 'White'],      ['#f2ece9', 'Taupe'],
+];
 
 // Known resource categories and languages (kept in sync with the frontend).
 const CMS_CATEGORIES = ['handbook', 'curriculum', 'lesson_plan', 'worksheet', 'hw', 'questions'];

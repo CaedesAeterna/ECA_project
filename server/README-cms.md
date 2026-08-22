@@ -1,8 +1,8 @@
 # ECA CMS (flat-file, no database)
 
 A single auth-protected PHP endpoint that manages the site's content — resource
-PDFs, event galleries and event report texts — by editing files on disk and
-`media/manifest.json`. There is **no database**: the manifest *is* the database,
+PDFs, event galleries, event report texts and the **page background colour** — by
+editing files on disk and `media/manifest.json`. There is **no database**: the manifest *is* the database,
 and there is **one admin user** whose bcrypt hash lives in a config file.
 
 The React site fetches `media/manifest.json` at runtime, so content changes made
@@ -62,6 +62,26 @@ From then on: **content is edited in the CMS** (never re-run the seed), and
   - `* lead paragraph` (rendered larger/muted, good for the intro)
   - `-- signature`
   - a blank line starts a new paragraph.
+
+- **Appearance — background colour**: a full colour picker with a **live preview**
+  of the real page. Set it by hex, the native picker, **RGB or HSL sliders**, one
+  of 12 **presets**, or the screen eyedropper (Chrome). *Undo changes* returns to
+  the saved colour, *Reset to the default* to the built-in blush. It applies to
+  the whole site on the visitor's next page load — no rebuild, no redeploy.
+
+## How the background colour works
+Tailwind emits each design token as a CSS custom property on `:root`
+(`--color-blush`), and the utilities use `var(--color-blush)` — so the site sets
+that single property on the root element at runtime and the page background (and
+every `bg-blush` band) repaints at once.
+
+- **The CMS is the only place the colour is set.** `src/lib/theme.ts` just applies
+  whatever the manifest says (`applyManifestTheme`); the CMS writes
+  `theme.background` (`"#rrggbb"`, or `null` for the built-in default).
+- To avoid a colour flash, the last applied colour is cached in `localStorage`
+  and painted by a tiny inline script in `index.html` before first paint; the
+  manifest is authoritative and overrides it a moment later. Saving `null`
+  (*Reset to the default*) also clears that cache for visitors.
 
 ## How this coexists with the app deploy
 The push workflow uploads `dist/` **plus `cms.php`/`cms_lib.php`**, and tracks
