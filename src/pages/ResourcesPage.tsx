@@ -214,7 +214,8 @@ export default function ResourcesPage() {
       </div>
 
       {/* Language-matched flagship downloads: teacher handbook, curriculum and
-          the best-practice collection (one document per language each). */}
+          the best-practice collection (one document per language each). All three
+          are the same size — one grid cell, matching the info cards above. */}
       <div className="mt-10 grid gap-5 sm:grid-cols-2">
         {handbook && (
           <DownloadCard
@@ -233,14 +234,12 @@ export default function ResourcesPage() {
           />
         )}
         {practice && (
-          <div className="sm:col-span-2">
-            <DownloadCard
-              href={mediaUrl(practice.file)}
-              download={names.practice}
-              title={t('resources.practice')}
-              subtitle={t('resources.download')}
-            />
-          </div>
+          <DownloadCard
+            href={mediaUrl(practice.file)}
+            download={names.practice}
+            title={t('resources.practice')}
+            subtitle={t('resources.download')}
+          />
         )}
       </div>
 
