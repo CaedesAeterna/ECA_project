@@ -52,6 +52,7 @@ const hu = {
     ],
     handbook: 'ECA tanári kézikönyv',
     curriculum: 'ECA tanterv',
+    practice: 'Gyakorlat',
     download: 'Letöltés (PDF)',
     more: 'További tananyagok',
     categories: {

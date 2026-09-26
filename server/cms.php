@@ -7,8 +7,9 @@ require __DIR__ . '/cms_lib.php';
 const MAX_PDF = 31457280;   // 30 MB
 const MAX_IMG = 15728640;   // 15 MB
 const CATEGORY_LABELS = [
-  'handbook' => 'Handbook', 'curriculum' => 'Curriculum', 'lesson_plan' => 'Lesson plans',
-  'worksheet' => 'Worksheets', 'hw' => 'Homework', 'questions' => 'Question collection',
+  'handbook' => 'Handbook', 'curriculum' => 'Curriculum', 'practice' => 'Best practice',
+  'lesson_plan' => 'Lesson plans', 'worksheet' => 'Worksheets', 'hw' => 'Homework',
+  'questions' => 'Question collection',
 ];
 const COUNTRY_LABELS = ['hu' => 'Hungary', 'pl' => 'Poland'];
 

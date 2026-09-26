@@ -48,6 +48,29 @@
         }
       ]
     },
+    "practice": {
+      "hu": [
+        {
+          "file": "resources/practice/hu/eca-jo-gyakorlatok-hu.pdf",
+          "title": "Jó gyakorlatok HU",
+          "download": "ECA_jo_gyakorlatok_HU.pdf"
+        }
+      ],
+      "en": [
+        {
+          "file": "resources/practice/en/eca-best-practice-en.pdf",
+          "title": "Best practice EN",
+          "download": "ECA_Best_Practice_EN.pdf"
+        }
+      ],
+      "pl": [
+        {
+          "file": "resources/practice/pl/eca-best-practice-pl.pdf",
+          "title": "Dobre praktyki PL",
+          "download": "ECA_Dobre_praktyki_PL.pdf"
+        }
+      ]
+    },
     "lesson_plan": {
       "hu": [
         {

@@ -329,6 +329,6 @@ const CMS_SWATCHES = [
 ];
 
 // Known resource categories and languages (kept in sync with the frontend).
-const CMS_CATEGORIES = ['handbook', 'curriculum', 'lesson_plan', 'worksheet', 'hw', 'questions'];
+const CMS_CATEGORIES = ['handbook', 'curriculum', 'practice', 'lesson_plan', 'worksheet', 'hw', 'questions'];
 const CMS_LANGS = ['hu', 'en', 'pl'];
 const CMS_COUNTRIES = ['hu', 'pl'];

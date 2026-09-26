@@ -55,6 +55,7 @@ const en = {
     ],
     handbook: 'ECA Teacher Handbook',
     curriculum: 'ECA Curriculum',
+    practice: 'ECA Best Practice',
     download: 'Download (PDF)',
     more: 'Further materials',
     categories: {

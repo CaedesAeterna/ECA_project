@@ -8,10 +8,25 @@ import { mediaUrl, useManifest, type ResourceDoc } from '../lib/manifest'
 
 // Clean download filenames for the two flagship documents, independent of the
 // (messy) source names.
-const DOWNLOAD_NAME: Record<string, { handbook: string; curriculum: string }> = {
-  en: { handbook: 'ECA_Handbook_EN.pdf', curriculum: 'ECA_Curriculum_EN.pdf' },
-  hu: { handbook: 'ECA_tanari_kezikonyv_HU.pdf', curriculum: 'ECA_tanterv_HU.pdf' },
-  pl: { handbook: 'ECA_Podrecznik_PL.pdf', curriculum: 'ECA_Program_nauczania_PL.pdf' },
+const DOWNLOAD_NAME: Record<
+  string,
+  { handbook: string; curriculum: string; practice: string }
+> = {
+  en: {
+    handbook: 'ECA_Handbook_EN.pdf',
+    curriculum: 'ECA_Curriculum_EN.pdf',
+    practice: 'ECA_Best_Practice_EN.pdf',
+  },
+  hu: {
+    handbook: 'ECA_tanari_kezikonyv_HU.pdf',
+    curriculum: 'ECA_tanterv_HU.pdf',
+    practice: 'ECA_jo_gyakorlatok_HU.pdf',
+  },
+  pl: {
+    handbook: 'ECA_Podrecznik_PL.pdf',
+    curriculum: 'ECA_Program_nauczania_PL.pdf',
+    practice: 'ECA_Dobre_praktyki_PL.pdf',
+  },
 }
 
 // Extra material types shown as collapsible panels, in this display order.
@@ -166,6 +181,7 @@ export default function ResourcesPage() {
   const docsFor = (cat: string, l: string): ResourceDoc[] => resources[cat]?.[l] ?? []
   const handbook = docsFor('handbook', lang)[0] ?? docsFor('handbook', 'en')[0]
   const curriculum = docsFor('curriculum', lang)[0] ?? docsFor('curriculum', 'en')[0]
+  const practice = docsFor('practice', lang)[0] ?? docsFor('practice', 'en')[0]
   const names = DOWNLOAD_NAME[lang] ?? DOWNLOAD_NAME.en
 
   const morePanels = MORE_CATEGORIES.map((cat) => ({
@@ -197,7 +213,8 @@ export default function ResourcesPage() {
         ))}
       </div>
 
-      {/* Language-matched flagship downloads: teacher handbook + curriculum. */}
+      {/* Language-matched flagship downloads: teacher handbook, curriculum and
+          the best-practice collection (one document per language each). */}
       <div className="mt-10 grid gap-5 sm:grid-cols-2">
         {handbook && (
           <DownloadCard
@@ -214,6 +231,16 @@ export default function ResourcesPage() {
             title={t('resources.curriculum')}
             subtitle={t('resources.download')}
           />
+        )}
+        {practice && (
+          <div className="sm:col-span-2">
+            <DownloadCard
+              href={mediaUrl(practice.file)}
+              download={names.practice}
+              title={t('resources.practice')}
+              subtitle={t('resources.download')}
+            />
+          </div>
         )}
       </div>
 
