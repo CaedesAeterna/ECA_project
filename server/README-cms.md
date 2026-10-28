@@ -50,8 +50,10 @@ From then on: **content is edited in the CMS** (never re-run the seed), and
 **code/app changes deploy by pushing** to `main`.
 
 ## Using it
-- **Resources**: per category (Handbook, Curriculum, Lesson plans, Worksheets,
-  Homework, Question collection) and language, upload/delete PDFs and rename their
+- **Resources**: per category (Handbook, Curriculum, Best practice, Teacher
+  training plan, 50 practical activities, Cards and user guide, Templates, ECA
+  book, Project results summary, Lesson plans, Worksheets, Homework, Question
+  collection) and language, upload/delete PDFs and rename their
   titles. "Lesson plans" also has an optional *Group* field (keeps a project's
   parts together, e.g. the "Paradicsom" series).
 - **Events**: per country (Hungary/Poland) add/edit/delete events. Each event has
@@ -115,3 +117,6 @@ never wipe the repo. Content-only commits are ignored by `deploy-cpanel.yml`
 `server/media/` is committed as the seed and is served at `/media` by a Vite dev
 middleware (see `vite.config.ts`). The committed copy is just the starting point;
 in production the CMS owns the live `media/` on the host.
+
+The October 2026 document update and its source-to-destination inventory are
+documented in [`docs/document-update-2026-10-28.md`](../docs/document-update-2026-10-28.md).

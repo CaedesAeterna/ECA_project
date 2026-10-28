@@ -8,6 +8,9 @@ const MAX_PDF = 31457280;   // 30 MB
 const MAX_IMG = 15728640;   // 15 MB
 const CATEGORY_LABELS = [
   'handbook' => 'Handbook', 'curriculum' => 'Curriculum', 'practice' => 'Best practice',
+  'training_plan' => 'Teacher training plan', 'activities' => '50 practical activities',
+  'cards' => 'Cards and user guide', 'templates' => 'Templates', 'book' => 'ECA book',
+  'summary' => 'Project results summary',
   'lesson_plan' => 'Lesson plans', 'worksheet' => 'Worksheets', 'hw' => 'Homework',
   'questions' => 'Question collection',
 ];

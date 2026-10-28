@@ -55,6 +55,12 @@ const pl = {
     download: 'Pobierz (PDF)',
     more: 'Dodatkowe materiały',
     categories: {
+      training_plan: 'Plan szkolenia nauczycieli',
+      activities: '50 praktycznych ćwiczeń EKA',
+      cards: 'Karty EKA i instrukcja użytkowania',
+      templates: 'Szablony EKA',
+      book: 'Książka EKA',
+      summary: 'Podsumowanie rezultatów projektu',
       lesson_plan: 'Scenariusze lekcji',
       worksheet: 'Karty pracy',
       hw: 'Prace domowe',

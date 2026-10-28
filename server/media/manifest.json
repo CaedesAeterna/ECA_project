@@ -1,27 +1,27 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-30T16:16:49.792Z",
+  "updatedAt": "2026-10-28T21:05:37.176Z",
   "resources": {
     "handbook": {
       "hu": [
         {
           "file": "resources/handbook/hu/eca-tanari-kezikonyv-hu.pdf",
-          "title": "Tanari kézikönyv HU",
-          "download": "ECA Tanari kézikönyv HU.pdf"
+          "title": "ECA tanári kézikönyv",
+          "download": "ECA_tanari_kezikonyv_HU.pdf"
         }
       ],
       "en": [
         {
           "file": "resources/handbook/en/eca-handbook-en.pdf",
-          "title": "Handbook EN",
-          "download": "ECA Handbook EN.pdf"
+          "title": "ECA Teacher’s Handbook",
+          "download": "ECA_Handbook_EN.pdf"
         }
       ],
       "pl": [
         {
           "file": "resources/handbook/pl/eca-handbook-pl-erasmus-final.pdf",
-          "title": "Handbook PL Erasmus FINAL",
-          "download": "ECA_Handbook_PL_Erasmus_FINAL.pdf"
+          "title": "Podręcznik dla nauczycieli ECA",
+          "download": "ECA_Podrecznik_PL.pdf"
         }
       ]
     },
@@ -29,22 +29,22 @@
       "hu": [
         {
           "file": "resources/curriculum/hu/eca-tanterv-konyv-hu-2026-06-24.pdf",
-          "title": "tanterv konyv HU 2026.06.24",
-          "download": "ECA tanterv konyv HU 2026.06.24.pdf"
+          "title": "ECA tanterv",
+          "download": "ECA_tanterv_HU.pdf"
         }
       ],
       "en": [
         {
           "file": "resources/curriculum/en/eca-tanterv-konyv-en-2026-06-24.pdf",
-          "title": "tanterv konyv EN 2026.06.24",
-          "download": "ECA tanterv konyv EN 2026.06.24.pdf"
+          "title": "ECA Curriculum",
+          "download": "ECA_Curriculum_EN.pdf"
         }
       ],
       "pl": [
         {
           "file": "resources/curriculum/pl/eca-curriculum-pl-wersja-finalna-docx.pdf",
-          "title": "Curriculum PL wersja finalna.docx",
-          "download": "ECA_Curriculum_PL_wersja finalna.docx.pdf"
+          "title": "Program nauczania ECA",
+          "download": "ECA_Program_nauczania_PL.pdf"
         }
       ]
     },
@@ -52,22 +52,128 @@
       "hu": [
         {
           "file": "resources/practice/hu/eca-jo-gyakorlatok-hu.pdf",
-          "title": "Jó gyakorlatok HU",
+          "title": "ECA jó gyakorlatok útmutató",
           "download": "ECA_jo_gyakorlatok_HU.pdf"
         }
       ],
       "en": [
         {
           "file": "resources/practice/en/eca-best-practice-en.pdf",
-          "title": "Best practice EN",
+          "title": "ECA Best Practice Guidelines",
           "download": "ECA_Best_Practice_EN.pdf"
         }
       ],
       "pl": [
         {
           "file": "resources/practice/pl/eca-best-practice-pl.pdf",
-          "title": "Dobre praktyki PL",
+          "title": "Wytyczne dotyczące najlepszych praktyk ECA",
           "download": "ECA_Dobre_praktyki_PL.pdf"
+        }
+      ]
+    },
+    "training_plan": {
+      "en": [
+        {
+          "file": "resources/training_plan/en/eca-teacher-training-plan-en.pdf",
+          "title": "ECA Teacher Training Plan",
+          "download": "ECA_Teacher_Training_Plan_EN.pdf"
+        }
+      ],
+      "pl": [
+        {
+          "file": "resources/training_plan/pl/eca-plan-szkolenia-nauczycieli-pl.pdf",
+          "title": "Plan szkolenia nauczycieli ECA",
+          "download": "ECA_Plan_szkolenia_nauczycieli_PL.pdf"
+        }
+      ],
+      "hu": [
+        {
+          "file": "resources/training_plan/hu/eca-tanari-tovabbkepzesi-terv-hu.pdf",
+          "title": "ECA tanári továbbképzési terv",
+          "download": "ECA_tanari_tovabbkepzesi_terv_HU.pdf"
+        }
+      ]
+    },
+    "activities": {
+      "en": [
+        {
+          "file": "resources/activities/en/eca-50-practical-activities-en.pdf",
+          "title": "50 practical ECA activities",
+          "download": "ECA_50_Practical_Activities_EN.pdf"
+        }
+      ],
+      "hu": [
+        {
+          "file": "resources/activities/hu/eca-50-gyakorlati-feladat-hu.pdf",
+          "title": "50 gyakorlati ECA feladat",
+          "download": "ECA_50_gyakorlati_feladat_HU.pdf"
+        }
+      ],
+      "pl": [
+        {
+          "file": "resources/activities/pl/eca-50-praktycznych-cwiczen-pl.pdf",
+          "title": "50 praktycznych ćwiczeń ECA",
+          "download": "ECA_50_praktycznych_cwiczen_PL.pdf"
+        }
+      ]
+    },
+    "cards": {
+      "en": [
+        {
+          "file": "resources/cards/en/eca-cards-en.pdf",
+          "title": "ECA Cards",
+          "download": "ECA_Cards_EN.pdf"
+        },
+        {
+          "file": "resources/cards/en/eca-cards-user-guide-en.pdf",
+          "title": "ECA Cards – User Guide",
+          "download": "ECA_Cards_User_Guide_EN.pdf"
+        }
+      ],
+      "hu": [
+        {
+          "file": "resources/cards/hu/eca-kartyak-hu.pdf",
+          "title": "ECA kártyák",
+          "download": "ECA_kartyak_HU.pdf"
+        },
+        {
+          "file": "resources/cards/hu/eca-kartyak-felhasznalasi-segedlet-hu.pdf",
+          "title": "ECA kártyák – Felhasználási segédlet",
+          "download": "ECA_kartyak_felhasznalasi_segedlet_HU.pdf"
+        }
+      ]
+    },
+    "templates": {
+      "en": [
+        {
+          "file": "resources/templates/shared/eca-templates-en-hu.pdf",
+          "title": "ECA Templates (English / Hungarian)",
+          "download": "ECA_Templates_EN_HU.pdf"
+        }
+      ],
+      "hu": [
+        {
+          "file": "resources/templates/shared/eca-templates-en-hu.pdf",
+          "title": "ECA sablonok (angol / magyar)",
+          "download": "ECA_Templates_EN_HU.pdf"
+        }
+      ]
+    },
+    "book": {
+      "hu": [
+        {
+          "file": "resources/book/hu/eca-konyv-hu.pdf",
+          "title": "ECA könyv – magyar gyűjteményes kötet",
+          "download": "ECA_konyv_HU.pdf"
+        }
+      ]
+    },
+    "summary": {
+      "en": [
+        {
+          "file": "resources/summary/en/eca-results-summary-en.pdf",
+          "title": "ECA Project Results Summary",
+          "download": "ECA_Results_Summary_EN.pdf"
         }
       ]
     },

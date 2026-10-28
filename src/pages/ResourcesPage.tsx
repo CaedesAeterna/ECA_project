@@ -6,7 +6,7 @@ import { mediaUrl, useManifest, type ResourceDoc } from '../lib/manifest'
 // already grouped by category -> language and sorted by the seed/CMS. Adding or
 // removing a file is done in the CMS; no rebuild needed.
 
-// Clean download filenames for the two flagship documents, independent of the
+// Clean download filenames for the three flagship documents, independent of the
 // (messy) source names.
 const DOWNLOAD_NAME: Record<
   string,
@@ -30,7 +30,18 @@ const DOWNLOAD_NAME: Record<
 }
 
 // Extra material types shown as collapsible panels, in this display order.
-const MORE_CATEGORIES = ['lesson_plan', 'worksheet', 'hw', 'questions'] as const
+const MORE_CATEGORIES = [
+  'training_plan',
+  'activities',
+  'cards',
+  'templates',
+  'book',
+  'summary',
+  'lesson_plan',
+  'worksheet',
+  'hw',
+  'questions',
+] as const
 
 // Document (file) icon.
 function DocIcon({ className }: { className?: string }) {
@@ -166,7 +177,7 @@ export default function ResourcesPage() {
   const { t, i18n } = useTranslation()
   const { data } = useManifest()
 
-  // Body copy and the two feature cards are stored in the locale files.
+  // Body copy and the feature cards are stored in the locale files.
   const paragraphs = t('resources.paragraphs', { returnObjects: true }) as string[]
   const items = t('resources.items', { returnObjects: true }) as {
     title: string
@@ -174,7 +185,7 @@ export default function ResourcesPage() {
   }[]
 
   // Serve the material set matching the active UI language, English as fallback
-  // for the two flagship documents. The extra materials are language-specific:
+  // for the three flagship documents. The extra materials are language-specific:
   // a panel simply doesn't appear if that language has no files yet.
   const lang = (i18n.resolvedLanguage ?? 'en').slice(0, 2)
   const resources = data?.resources ?? {}
@@ -243,9 +254,8 @@ export default function ResourcesPage() {
         )}
       </div>
 
-      {/* Collapsible panels for the remaining material types (lesson plans,
-          worksheets, homework, question collections). Hidden entirely when the
-          active language has none of them. */}
+      {/* Collapsible panels for the remaining material types. Hidden entirely
+          when the active language has none of them. */}
       {morePanels.length > 0 && (
         <div className="mt-12">
           <h2 className="font-display text-xl font-extrabold tracking-tight text-ink">

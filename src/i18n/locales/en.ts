@@ -59,6 +59,12 @@ const en = {
     download: 'Download (PDF)',
     more: 'Further materials',
     categories: {
+      training_plan: 'Teacher training plan',
+      activities: '50 practical ECA activities',
+      cards: 'ECA cards and user guide',
+      templates: 'ECA templates',
+      book: 'ECA book',
+      summary: 'Project results summary',
       lesson_plan: 'Lesson plans',
       worksheet: 'Worksheets',
       hw: 'Homework',
