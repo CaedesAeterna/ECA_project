@@ -6,6 +6,8 @@
 # by the separate `seed-media.yml` workflow, then owned by the CMS on the server
 # (uploads + edited manifest.json must survive redeploys). This deploy only ever
 # manages its own files, so it never deletes or overwrites media/.
+# Published project-result PDFs are bundled into dist/assets/ by Vite and travel
+# with this app deploy; the runtime CMS media tree remains independently owned.
 #
 # One-time setup:
 #   1. cPanel -> FTP Accounts: create a dedicated account (e.g. deploy@ecaproject.eu)

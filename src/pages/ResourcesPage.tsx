@@ -1,19 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { mediaUrl, useManifest, type ResourceDoc } from '../lib/manifest'
-
-// Follow the programme from its pedagogical foundations to practical tools
-// and the collected volume. Each result uses only the active language's PDFs.
-const RESULT_CATEGORIES = [
-  'curriculum',
-  'handbook',
-  'training_plan',
-  'activities',
-  'practice',
-  'cards',
-  'templates',
-  'book',
-] as const
+import { getProjectResults, RESULT_CATEGORIES, type ProjectResultDoc } from '../lib/projectResults'
 
 const MORE_CATEGORIES = ['lesson_plan', 'worksheet', 'hw', 'questions', 'summary'] as const
 
@@ -60,7 +48,7 @@ function ResultCard({ category, title, paragraphs, docs }: {
   category: string
   title: string
   paragraphs: readonly string[]
-  docs: ResourceDoc[]
+  docs: ProjectResultDoc[]
 }) {
   const { t } = useTranslation()
 
@@ -77,7 +65,7 @@ function ResultCard({ category, title, paragraphs, docs }: {
       <ul className="mt-6 flex flex-wrap gap-3 border-t border-ink/10 pt-5">
         {docs.map((doc) => (
           <li key={doc.file} className="max-w-full">
-            <a href={mediaUrl(doc.file)} download={doc.download}
+            <a href={doc.url} download={doc.download}
               aria-label={t('resources.downloadDocument', { title: doc.title })}
               className="inline-flex max-w-full items-center gap-3 rounded-xl bg-brand px-5 py-3 font-semibold text-white transition-colors hover:bg-brand/85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
               <DocIcon className="h-5 w-5 shrink-0" />
@@ -123,8 +111,7 @@ export default function ResourcesPage() {
     (typeof RESULT_CATEGORIES)[number], string[]
   >
   const docsFor = (category: string) => data?.resources[category]?.[language] ?? []
-  const results = RESULT_CATEGORIES.map((category) => ({ category, docs: docsFor(category) }))
-    .filter(({ docs }) => docs.length > 0)
+  const results = !data && !error ? [] : getProjectResults(data?.resources, language)
   const morePanels = MORE_CATEGORIES.map((category) => ({ category, docs: docsFor(category) }))
     .filter(({ docs }) => docs.length > 0)
 

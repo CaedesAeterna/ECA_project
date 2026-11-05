@@ -18,7 +18,8 @@ const MIME: Record<string, string> = {
 
 // Dev-only: serve the CMS-owned media tree (server/media) at /media so the app
 // can fetch the manifest and files locally. In production these live next to
-// index.html on the host and are never part of the Vite build.
+// index.html on the host. Published project-result PDFs are also imported by
+// src/lib/projectResults.ts so an app deploy can serve missing CMS categories.
 function serveMediaDev(): Plugin {
   return {
     name: 'eca-serve-media-dev',

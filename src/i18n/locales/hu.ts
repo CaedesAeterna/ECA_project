@@ -43,7 +43,7 @@ const hu = {
     downloadDocument: '{{title}} letöltése (PDF)',
     more: 'További tananyagok és példák',
     loading: 'A dokumentumok betöltése…',
-    loadError: 'A dokumentumok most nem tölthetők be. Kérjük, próbáld újratölteni az oldalt.',
+    loadError: 'A további tananyagok most nem tölthetők be. Kérjük, próbáld újratölteni az oldalt.',
     categories: {
       curriculum: 'ECA tanterv',
       handbook: 'ECA tanári kézikönyv',
@@ -105,7 +105,6 @@ const hu = {
   },
   footer: {
     rights: 'Minden jog fenntartva.',
-    openDisclaimer: 'Az uniós finanszírozási nyilatkozat megnyitása teljes méretben',
     disclaimer: 'Az Európai Unió finanszírozásával. Az itt szereplő információk és állítások a szerző(k) álláspontját képviselik, és nem feltétlenül tükrözik az Európai Unió vagy a Tempus Közalapítvány hivatalos véleményét. Sem az Európai Unió, sem a támogatást nyújtó hatóság nem vonható felelősségre miattuk.',
   },
 } as const

@@ -45,7 +45,7 @@ const en = {
     downloadDocument: 'Download {{title}} (PDF)',
     more: 'Additional materials and examples',
     loading: 'Loading documents…',
-    loadError: 'The documents could not be loaded. Please try reloading the page.',
+    loadError: 'Additional materials could not be loaded. Please try reloading the page.',
     categories: {
       curriculum: 'ECA Curriculum',
       handbook: 'ECA Teacher’s Handbook',
@@ -105,7 +105,6 @@ const en = {
   },
   footer: {
     rights: 'All rights reserved.',
-    openDisclaimer: 'Open the EU funding disclaimer at full size',
     disclaimer: 'This project has been funded with support from the European Commission. This publication reflects the views only of the author, and the Commission cannot be held responsible for any use which may be made of the information contained therein.',
   },
 } as const

@@ -118,6 +118,37 @@ never wipe the repo. Content-only commits are ignored by `deploy-cpanel.yml`
 middleware (see `vite.config.ts`). The committed copy is just the starting point;
 in production the CMS owns the live `media/` on the host.
 
+## Published project results
+
+The eight official result categories also have an app-owned release snapshot:
+`src/data/project-results.json` indexes 21 PDFs in `src/assets/project-results/`.
+Vite includes these PDFs in `dist/assets/`, so an ordinary app deploy can show
+new result categories even if the live CMS manifest predates them. Keep the
+snapshot outside `server/media/`: the server-to-repo mirror may remove files
+that have not been uploaded to the live CMS.
+
+`src/lib/projectResults.ts` uses the release only when a category/language key
+is absent. Existing CMS lists, including explicit empty lists after deletion,
+remain authoritative and keep their `/media/` URLs. A failed manifest request
+also falls back to the published PDFs. Events, galleries, appearance and
+additional teaching materials still come only from the live CMS.
+
+Fallback-only documents do not yet appear in the CMS dashboard. Uploading a
+document to its category/language creates the live list and hands that list to
+the CMS; after that, rename/delete/upload work as usual.
+
+When publishing a new official document release:
+
+1. Update the eight groups in `src/data/project-results.json`; each `file`
+   retains its `resources/<category>/<language>/...pdf` identifier.
+2. Put each corresponding PDF in
+   `src/assets/project-results/<category>/<language>/...pdf`, and remove
+   superseded release copies. Keep the CMS bootstrap files in `server/media/`
+   consistent when updating that seed.
+3. Run `yarn build` and verify that `dist/assets/` contains the expected PDFs.
+   An application deploy uploads the release assets without resetting the
+   live CMS manifest or its media tree.
+
 The October 2026 document update and its source-to-destination inventory are
 documented in [`docs/document-update-2026-10-28.md`](../docs/document-update-2026-10-28.md).
 

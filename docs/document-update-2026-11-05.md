@@ -32,13 +32,11 @@ A letöltési lista külön jelzi a betöltést és a dokumentumjegyzék lekér�
 
 ## Lábléc
 
-- Magyar oldalak: a megadott `Felelősségkizárás ez a jó.png`, változatlanul
-  átmásolva `src/assets/eu-disclaimer-hu.png` néven.
-- Angol és lengyel oldalak: a megadott `Eu kötleező szöveg kép.PNG`, változatlanul
-  átmásolva `src/assets/eu-disclaimer-en.png` néven.
-- A kép a közös lábléc része, ezért minden aloldalon megjelenik. Nyelvváltáskor
-  a képfájl is vált. A teljes nyilatkozat alternatív szövegként is rendelkezésre
-  áll; a kép megnyitható teljes méretben.
+- Magyar oldalak: a megadott magyar nyilatkozat valódi HTML-bekezdésként jelenik meg.
+- Angol és lengyel oldalak: az eredeti angol nyilatkozat jelenik meg, szintén
+  szövegként. A bekezdés nyelvi jelölése ezeken az oldalakon `en`.
+- A nyilatkozat minden aloldal közös láblécében olvasható, kijelölhető és mobilon
+  tördelhető. A korábbi két láblécképet és a képmegnyitási hivatkozást eltávolítottuk.
 
 ## Ismertetők és frissített fájlok
 
@@ -67,7 +65,7 @@ nem került be kilencedik eredménytípusként a kért nyolc mellé.
 - A módosított PHP-fájlok szintaktikailag helyesek (`php -l`).
 - A tényleges React-komponensek automatikus renderelése mindhárom nyelven
   ellenőrizte a fő eredmények sorrendjét, a 8/7/6 nyelvi elérhetőséget,
-  a láblécképek nyelvét és az összes megjelenő PDF-hivatkozást.
+  a lábléc valódi szövegét, nyelvét és az összes megjelenő PDF-hivatkozást.
 - Mindhárom nyelven helyes a betöltési és hibajelzés; nincs hiányzó fordítási kulcs.
 - A 21 fő PDF ellenőrzőösszege megegyezik az új forráscsomag megfelelő fájljával.
   A PDF-ek `pdfinfo` és `pdftotext` segítségével olvashatók.
@@ -79,13 +77,45 @@ nem került be kilencedik eredménytípusként a kért nyolc mellé.
 A Chromium indítását a környezet `setsockopt: Operation not permitted`
 hibával letiltotta, ezért a renderelési ellenőrzés böngésző nélkül történt.
 
+## Hiányzó eredménycsoportok javítása
+
+A négy jelzett csoport mind a 11 PDF-je már megvolt és egyezett a forráscsomaggal.
+A megjelenítés azonban kizárólag a futás közben lekért CMS-tartalomjegyzéktől
+függött. A korábbi alkalmazásbuild nem tartalmazott PDF-eket, a normál deploy
+pedig nem frissítette a CMS tartalomjegyzékét. Egy régebbi éles tartalomjegyzék
+ezért elrejthette az új csoportokat.
+
+A `src/data/project-results.json` és a `src/assets/project-results/` most külön,
+verziózott kiadási példányként tartalmazza a 21 fő PDF-et és a nyelvi besorolást.
+A Vite ezeket a `dist/assets/` könyvtárba építi, ezért a normál alkalmazásdeploy
+is feltölti a fájlokat. Ez a példány a CMS visszafelé futó médiaszinkronjától
+függetlenül megmarad.
+
+- Ha egy kategória nyelvi bejegyzése hiányzik az éles tartalomjegyzékből, az
+  oldal a kiadáshoz mellékelt dokumentumokat és azok buildelt hivatkozását mutatja.
+- Ha a CMS-ben létezik a bejegyzés, annak dokumentumai, címei és `/media/`
+  hivatkozásai érvényesek. A kiadási példány nem írja felül az éles CMS-fájlokat.
+- A CMS-ben kifejezetten üresre törölt lista továbbra is üres marad.
+- Sikertelen tartalomjegyzék-lekéréskor a 21 fő PDF elérhető; a hibaüzenet
+  a további tananyagok betöltésére vonatkozik.
+
+A kiadási dokumentumok addig nem szerepelnek az adminfelület listájában, amíg
+nincs hozzájuk éles CMS-bejegyzés. Az adminisztrátor az adott kategória és nyelv
+alatti feltöltéssel veheti át a kezelésüket. Új hivatalos dokumentumkiadáskor
+a külön kiadási példányt is frissíteni kell; részletek a `server/README-cms.md` fájlban.
+
+Az ellenőrzés régi és teljesen üres tartalomjegyzékkel, sikertelen lekéréssel,
+szándékos CMS-törléssel és egyéni CMS-fájlokkal is lefutott magyarul, angolul és
+lengyelül. Mind a 21 buildelt PDF bájtra egyezik a kiadási és forrásfájlokkal.
+
 ## Élesítés
 
 A változások a helyi projektben készültek el. Éles feltöltés, commit és push
-nem történt. A szokásos alkalmazásdeploy nem tölti fel a `server/media/`
-tartalmát: a frissített dokumentumok és a hozzájuk tartozó tartalomjegyzék
-külön tartalomfrissítést igényelnek. A tárhelyről visszafelé futó szinkron
-az éles tartalmat tekinti forrásnak.
+nem történt ebben a javításban. A szokásos alkalmazásdeploy most a fő eredmények
+PDF-jeit is tartalmazza a buildelt assetek között. A `server/media/` könyvtár
+és az események, galériák, további CMS-feltöltések, témabeállítások továbbra is
+az éles CMS kezelésében maradnak; a tárhelyről visszafelé futó szinkron ezt a
+médiastruktúrát menti a repóba.
 
 ## Fájljegyzék
 
