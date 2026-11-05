@@ -30,6 +30,12 @@ a fő eredmények alatt, a további tananyagok között érhető el. Így össze
 A hosszabb menücím miatt a mobilmenü 1024 pixel alatti szélességnél jelenik meg.
 A letöltési lista külön jelzi a betöltést és a dokumentumjegyzék lekérési hibáját.
 
+A dokumentumlista kompakt kártyarács: 768 pixeltől két oszlopban, kisebb
+képernyőn egy oszlopban jelenik meg. A kártyák háromsoros előnézetet mutatnak;
+a teljes ismertető a Részletek hivatkozással lenyitható és visszacsukható.
+A PDF-letöltés mindig látható. A további tananyagok paneljei is két oszlopba
+rendeződnek nagyobb képernyőn.
+
 ## Lábléc
 
 - Magyar oldalak: a megadott magyar nyilatkozat valódi HTML-bekezdésként jelenik meg.
