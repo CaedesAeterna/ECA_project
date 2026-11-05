@@ -120,3 +120,6 @@ in production the CMS owns the live `media/` on the host.
 
 The October 2026 document update and its source-to-destination inventory are
 documented in [`docs/document-update-2026-10-28.md`](../docs/document-update-2026-10-28.md).
+
+The current eight project results, language availability and footer disclaimers
+are documented in [`docs/document-update-2026-11-05.md`](../docs/document-update-2026-11-05.md).

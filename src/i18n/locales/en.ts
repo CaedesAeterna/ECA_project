@@ -6,7 +6,7 @@ const en = {
   nav: {
     project: 'The ECA Project',
     partners: 'Partners',
-    resources: 'Resources',
+    resources: 'Resources and Results',
     events: 'Events',
   },
   home: {
@@ -37,38 +37,55 @@ const en = {
     ],
   },
   resources: {
-    title: 'Resources',
-    // NOTE: en/pl bodies are AI drafts of the Hungarian source — review before publishing.
+    title: 'Resources and Results',
     paragraphs: [
-      'If we had to sum up the project’s goal in a single sentence, it would be this: to prepare teachers so they can give students the greatest possible learning autonomy within the safest possible learning environment. This is also the ultimate goal of our curriculum.',
-      'The handbook contains practical tools for person-centred, ECA-based (Emotion–Cognition–Action) teaching in the lower primary grades. As a teacher, you will find games, templates, lesson outlines and checklists here. As you get to know these practical tools, you also take on the attitude of person-centred pedagogy, since ECA is built on it.',
+      'Explore the ECA project results and downloadable educational materials, from the pedagogical foundations to tools for everyday teaching. Documents are shown in the selected language. The cards are available in English and Hungarian, while The Big ECA Book is available in Hungarian only.',
     ],
-    items: [
-      {
-        title: 'ECA QUICK MAP',
-        body: 'An at-a-glance visual compass for the whole ECA programme.',
-      },
-      {
-        title: 'ECA lesson template',
-        body: 'An easy-to-use template.',
-      },
-    ],
-    handbook: 'ECA Teacher Handbook',
-    curriculum: 'ECA Curriculum',
-    practice: 'ECA Best Practice',
     download: 'Download (PDF)',
-    more: 'Further materials',
+    downloadDocument: 'Download {{title}} (PDF)',
+    more: 'Additional materials and examples',
+    loading: 'Loading documents…',
+    loadError: 'The documents could not be loaded. Please try reloading the page.',
     categories: {
-      training_plan: 'Teacher training plan',
-      activities: '50 practical ECA activities',
-      cards: 'ECA cards and user guide',
-      templates: 'ECA templates',
-      book: 'ECA book',
-      summary: 'Project results summary',
+      curriculum: 'ECA Curriculum',
+      handbook: 'ECA Teacher’s Handbook',
+      training_plan: 'ECA Teacher Training Plan',
+      activities: 'ECA Practical Activity Collection',
+      practice: 'ECA Best Practice Guidelines',
+      cards: 'ECA Cards and User Guide',
+      templates: 'ECA Templates',
+      book: 'The Big ECA Book',
       lesson_plan: 'Lesson plans',
       worksheet: 'Worksheets',
       hw: 'Homework',
       questions: 'Question collection',
+      summary: 'Project results summary',
+    },
+    results: {
+      curriculum: [
+        'The ECA Curriculum provides the theoretical and methodological framework of the Emotion–Cognition–Action approach, developed primarily for lower primary education. It describes how emotions, cognitive learning and practical action can be consciously connected in the learning process. The curriculum presents the pedagogical principles of the ECA approach, its objectives, target groups, learning areas and expected development of competences. It supports teachers in creating learning situations that combine emotional engagement, thinking, creativity, choice, cooperation, reflection and real-life action. The curriculum serves as the conceptual foundation for the ECA Teacher Handbook, training programme and practical learning materials developed within the project. It is available in Hungarian, English and Polish.',
+      ],
+      handbook: [
+        'The ECA Teacher Handbook is a practical guide for lower primary teachers who want to apply the Emotion–Cognition–Action approach in everyday school practice. It shows how ECA elements can be introduced gradually, without requiring a complete transformation of teaching practice at once. The Handbook addresses the changing role of the teacher towards facilitation, the practical integration of Emotion–Cognition–Action, science and ecological learning, individualised and differentiated learning, and approaches to assessment. Particular attention is given to teacher self-reflection and to increasing student autonomy, choice and responsibility for learning. The Handbook combines methodological guidance with reflection questions, practical examples, teaching tools and lesson plans, supporting educators in adapting ECA to their own learners and learning environments. It is available in Hungarian, English and Polish.',
+      ],
+      training_plan: [
+        'The ECA Teacher Training Plan is a five-day, 30-hour professional development programme for educators, trainers and learning facilitators. It combines Social Emotional Learning, Character Strengths, Emotional Intelligence, Multiple Intelligences and experiential learning within the ECA framework. The training focuses on creating safe and engaging learning environments, understanding learner diversity and individual strengths, inclusion, learning through experience and the practical design of ECA activities. A distinctive element is urban exploration, using the city as a living classroom. The programme combines theory, practical activities, discussion, active learning and reflection. The guide provides a complete programme structure with 14 modules, activities and resources that can be used to deliver the training. The Training Plan is available in Hungarian, English and Polish.',
+      ],
+      activities: [
+        'The ECA Practical Activity Collection is a flexible toolkit containing 50 practical materials: 40 lesson plans, 4 worksheets, 3 homework activities and 3 project outlines. The activities are designed primarily for lower primary education and connect the three elements of the ECA approach: Emotion, Cognition and Action. Science and ecological topics are explored through personal experience and emotional engagement, questioning, observation, comparison, measurement, thinking and concrete action. The collection includes garden and outdoor learning, nature in the classroom, ecological topics and skill-building activities. It is not intended as a fixed teaching sequence: educators can select and adapt the materials to different topics, age groups, learners and educational contexts. The collection is available in Hungarian, English and Polish.',
+      ],
+      practice: [
+        'The ECA Best Practice Guidelines brings together the main lessons learnt from developing, piloting, adapting and using ECA in different educational settings. They draw on experiences from classrooms, teacher training, university programmes, camps, gardens, outdoor activities and community events. The Guidelines explore what makes a learning process genuinely ECA and highlight key aspects such as learner autonomy, authentic action, choice, reflection, cooperation and the learning environment. “Postcards from practice” present concrete experiences and lessons learnt, while six common traps show what can go wrong when applying ECA and suggest practical alternatives. The Guidelines encourage educators not simply to reproduce ECA materials, but to adapt them and create meaningful ECA learning experiences in their own contexts. The Guidelines is available in Hungarian, English and Polish.',
+      ],
+      cards: [
+        'The ECA Cards are a set of 20 practical reflection and activity cards for educators. It is accompanied by a User Guide. They offer short texts, visual models, questions and tasks that connect the ECA approach with everyday teaching practice. The cards encourage educators to reflect on learner autonomy, personal involvement, cooperation and meaningful action. They can be used individually, in teacher training or professional discussions, and adapted to different needs and contexts. The cards and User Guide are available in English and Hungarian.',
+      ],
+      templates: [
+        'The ECA Templates collection provides practical documents to support the implementation of the Emotion–Cognition–Action approach in educational and project settings. The English version includes three sections: project management, professional teaching materials and dissemination. It contains templates for monthly reporting, project meetings, attendance lists, worksheets, homework, lesson planning, project outlines, piloting, training certificates and dissemination reporting. The materials help educators and project partners plan, document, evaluate and share their activities. The templates can be adapted to different educational situations and organisational needs.',
+      ],
+      book: [
+        'The Big ECA Book brings together the ECA Curriculum, Teacher’s Handbook, Practical Activity Collection and Teacher Training Plan in one volume. Available in Hungarian only.',
+      ],
     },
   },
   events: {
@@ -88,6 +105,8 @@ const en = {
   },
   footer: {
     rights: 'All rights reserved.',
+    openDisclaimer: 'Open the EU funding disclaimer at full size',
+    disclaimer: 'This project has been funded with support from the European Commission. This publication reflects the views only of the author, and the Commission cannot be held responsible for any use which may be made of the information contained therein.',
   },
 } as const
 

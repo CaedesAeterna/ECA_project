@@ -5,7 +5,7 @@ const pl = {
   nav: {
     project: 'Projekt EKA',
     partners: 'Partnerzy',
-    resources: 'Baza wiedzy',
+    resources: 'Baza wiedzy i rezultaty',
     events: 'Wydarzenia',
   },
   home: {
@@ -34,37 +34,55 @@ const pl = {
     ],
   },
   resources: {
-    title: 'Baza wiedzy',
+    title: 'Baza wiedzy i rezultaty',
     paragraphs: [
-      'Gdybyśmy chcieli podsumować cel projektu w jednym zdaniu, brzmiałoby ono tak: przygotować nauczycieli, aby potrafili zapewnić uczniom możliwie największą autonomię uczenia się w możliwie najbezpieczniejszej atmosferze nauki. Jest to również ostateczny cel naszego programu nauczania.',
-      'Podręcznik zawiera praktyczne narzędzia do edukacji skoncentrowanej na osobie, opartej na EKA (Emocja–Poznanie–Akcja), na etapie wczesnoszkolnym. Jako nauczyciel znajdziesz tu gry, szablony, konspekty lekcji i listy kontrolne. Poznając te praktyczne narzędzia, przyswajasz jednocześnie postawę pedagogiki skoncentrowanej na osobie, ponieważ EKA właśnie na niej się opiera.',
+      'Poznaj rezultaty projektu ECA i pobierz materiały edukacyjne: od podstaw pedagogicznych po narzędzia do codziennej pracy nauczyciela. Dokumenty są wyświetlane w wybranym języku. Karty są dostępne po angielsku i węgiersku, a Wielka księga ECA wyłącznie po węgiersku.',
     ],
-    items: [
-      {
-        title: 'EKA QUICK MAP',
-        body: 'Szybki, przejrzysty wizualny drogowskaz po całym programie EKA.',
-      },
-      {
-        title: 'Szablon lekcji EKA',
-        body: 'Łatwy w użyciu szablon.',
-      },
-    ],
-    handbook: 'Podręcznik nauczyciela EKA',
-    curriculum: 'Program nauczania EKA',
-    practice: 'Dobre praktyki EKA',
     download: 'Pobierz (PDF)',
-    more: 'Dodatkowe materiały',
+    downloadDocument: 'Pobierz {{title}} (PDF)',
+    more: 'Dodatkowe materiały i przykłady',
+    loading: 'Ładowanie dokumentów…',
+    loadError: 'Nie udało się załadować dokumentów. Spróbuj odświeżyć stronę.',
     categories: {
-      training_plan: 'Plan szkolenia nauczycieli',
-      activities: '50 praktycznych ćwiczeń EKA',
-      cards: 'Karty EKA i instrukcja użytkowania',
-      templates: 'Szablony EKA',
-      book: 'Książka EKA',
-      summary: 'Podsumowanie rezultatów projektu',
+      curriculum: 'Program nauczania ECA',
+      handbook: 'Podręcznik nauczyciela ECA',
+      training_plan: 'Plan szkolenia nauczycieli ECA',
+      activities: 'Zbiór praktycznych zadań ECA',
+      practice: 'Wytyczne dobrych praktyk ECA',
+      cards: 'Karty ECA i instrukcja użytkowania',
+      templates: 'Szablony ECA',
+      book: 'Wielka księga ECA',
       lesson_plan: 'Scenariusze lekcji',
       worksheet: 'Karty pracy',
       hw: 'Prace domowe',
       questions: 'Zbiór pytań',
+      summary: 'Podsumowanie rezultatów projektu',
+    },
+    results: {
+      curriculum: [
+        'Program Nauczania ECA przedstawia teoretyczne i metodyczne ramy podejścia Emocje–Poznanie–Działanie, opracowanego przede wszystkim dla młodszych klas szkoły podstawowej. Opisuje, jak świadomie łączyć emocje, uczenie się poznawcze i praktyczne działanie w procesie edukacyjnym. Program przedstawia zasady pedagogiczne ECA, jego cele, grupy docelowe, obszary uczenia się oraz oczekiwany rozwój kompetencji. Wspiera nauczycieli w tworzeniu sytuacji edukacyjnych łączących zaangażowanie emocjonalne, myślenie, kreatywność, możliwość wyboru, współpracę, refleksję i działanie w rzeczywistych sytuacjach. Stanowi podstawę koncepcyjną Podręcznika Nauczyciela ECA, programu szkoleniowego oraz praktycznych materiałów edukacyjnych opracowanych w ramach projektu. Jest dostępny w języku węgierskim, angielskim i polskim.',
+      ],
+      handbook: [
+        'Podręcznik Nauczyciela ECA to praktyczny przewodnik dla nauczycieli młodszych klas szkoły podstawowej, którzy chcą stosować podejście Emocje–Poznanie–Działanie w codziennej praktyce szkolnej. Pokazuje, jak stopniowo wprowadzać elementy ECA bez konieczności całkowitej zmiany sposobu nauczania. Podręcznik omawia zmieniającą się rolę nauczyciela jako facylitatora, praktyczną integrację Emocji–Poznania–Działania, nauczanie przyrodnicze i ekologiczne, indywidualizację i różnicowanie procesu uczenia się oraz metody oceniania. Szczególną uwagę poświęca autorefleksji nauczycieli oraz zwiększaniu autonomii uczniów, możliwości wyboru i odpowiedzialności za własną naukę. Łączy wskazówki metodyczne z pytaniami do refleksji, praktycznymi przykładami, narzędziami dydaktycznymi i scenariuszami lekcji, wspierając nauczycieli w dostosowywaniu ECA do potrzeb uczniów i środowiska uczenia się. Jest dostępny w języku węgierskim, angielskim i polskim.',
+      ],
+      training_plan: [
+        'Plan Szkolenia Nauczycieli ECA to pięciodniowy, 30-godzinny program doskonalenia zawodowego dla nauczycieli, trenerów i facylitatorów uczenia się. W ramach podejścia ECA łączy uczenie się społeczno-emocjonalne, mocne strony charakteru, inteligencję emocjonalną, teorię inteligencji wielorakich oraz uczenie się przez doświadczenie. Szkolenie koncentruje się na tworzeniu bezpiecznego i angażującego środowiska uczenia się, rozumieniu różnorodności uczniów i ich indywidualnych mocnych stron, edukacji włączającej, uczeniu się przez doświadczenie oraz praktycznym projektowaniu działań ECA. Charakterystycznym elementem programu jest eksploracja miasta, traktowanego jako żywa przestrzeń edukacyjna. Program łączy teorię, ćwiczenia praktyczne, dyskusje, aktywne uczenie się i refleksję. Przewodnik zawiera kompletną strukturę szkolenia obejmującą 14 modułów, działania i materiały potrzebne do jego realizacji. Plan szkolenia jest dostępny w języku węgierskim, angielskim i polskim.',
+      ],
+      activities: [
+        'Zbiór Praktycznych Zadań ECA to elastyczny zestaw materiałów edukacyjnych zawierający 50 materiałów praktycznych: 40 scenariuszy lekcji, 4 karty pracy, 3 zadania domowe i 3 konspekty projektów. Działania zostały opracowane przede wszystkim z myślą o uczniach młodszych klas szkoły podstawowej i łączą trzy elementy podejścia ECA: Emocje, Poznanie i Działanie. Tematy przyrodnicze i ekologiczne są poznawane poprzez osobiste doświadczenia i zaangażowanie emocjonalne, zadawanie pytań, obserwację, porównywanie, pomiary, myślenie oraz konkretne działania. Zbiór obejmuje naukę w ogrodzie i na świeżym powietrzu, poznawanie przyrody w klasie, zagadnienia ekologiczne oraz działania rozwijające umiejętności. Nie jest przeznaczony do realizacji w ustalonej kolejności: nauczyciele mogą wybierać i dostosowywać materiały do różnych tematów, grup wiekowych, uczniów i kontekstów edukacyjnych. Zbiór jest dostępny w języku węgierskim, angielskim i polskim.',
+      ],
+      practice: [
+        'Wytyczne Dobrych Praktyk ECA przedstawiają najważniejsze doświadczenia z opracowywania, testowania i stosowania ECA w różnych środowiskach edukacyjnych: szkołach, na szkoleniach nauczycieli, uczelniach, obozach, w ogrodach i podczas wydarzeń społecznych. Wyjaśniają, co wyróżnia podejście ECA, podkreślając autonomię uczniów, możliwość wyboru, autentyczne działanie, refleksję i współpracę. „Pocztówki z praktyki” prezentują konkretne doświadczenia, a sześć typowych pułapek wskazuje trudności i praktyczne rozwiązania. Wytyczne zachęcają nauczycieli do dostosowywania materiałów ECA do własnych potrzeb. Są dostępne w języku węgierskim, angielskim i polskim.',
+      ],
+      cards: [
+        'Karty ECA to zestaw 20 kart do refleksji i ćwiczeń dla nauczycieli wraz z instrukcją użytkowania. Są dostępne w języku angielskim i węgierskim.',
+      ],
+      templates: [
+        'Zbiór szablonów ECA zawiera praktyczne dokumenty wspierające planowanie i dokumentowanie działań edukacyjnych. Polska wersja obejmuje cztery szablony: scenariusz lekcji, kartę pracy, pracę domową i plan projektu. Materiały pomagają nauczycielom świadomie łączyć emocje, poznanie i działanie oraz dostosowywać zajęcia do potrzeb uczniów i różnych sytuacji edukacyjnych.',
+      ],
+      book: [
+        'Wielka księga ECA łączy program nauczania, podręcznik nauczyciela, zbiór zadań praktycznych i plan szkolenia nauczycieli. Jest dostępna wyłącznie w języku węgierskim.',
+      ],
     },
   },
   events: {
@@ -84,6 +102,8 @@ const pl = {
   },
   footer: {
     rights: 'Wszelkie prawa zastrzeżone.',
+    openDisclaimer: 'Otwórz oświadczenie o finansowaniu UE w pełnym rozmiarze',
+    disclaimer: 'This project has been funded with support from the European Commission. This publication reflects the views only of the author, and the Commission cannot be held responsible for any use which may be made of the information contained therein.',
   },
 } as const
 

@@ -3,6 +3,7 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
 import FoundationCredit from './FoundationCredit'
+import FundingDisclaimer from './FundingDisclaimer'
 import ecaLogo from '../assets/eca-logo.png'
 
 // Top-level navigation, shared by the desktop header and the mobile menu.
@@ -51,7 +52,7 @@ export default function Layout() {
           </NavLink>
 
           {/* Desktop navigation + language selector */}
-          <div className="hidden items-center gap-8 md:flex">
+          <div className="hidden items-center gap-5 lg:flex xl:gap-8">
             {NAV.map(({ to, key }) => (
               <NavLink key={to} to={to} className={linkClass}>
                 {t(key)}
@@ -61,7 +62,7 @@ export default function Layout() {
           </div>
 
           {/* Mobile: language selector + hamburger */}
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
             <LanguageSwitcher />
             <button
               type="button"
@@ -93,7 +94,7 @@ export default function Layout() {
 
         {/* Mobile menu panel */}
         {menuOpen && (
-          <div className="border-t border-ink/10 md:hidden">
+          <div className="border-t border-ink/10 lg:hidden">
             <div className="mx-auto max-w-6xl px-6 py-3">
               {NAV.map(({ to, key }) => (
                 <NavLink key={to} to={to} className={mobileLinkClass}>
@@ -109,11 +110,11 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      {/* Footer: the hairline (border-t) is the divider above the foundation
-          credit, then the copyright line. Shown on every page via the layout. */}
+      {/* Shared footer with the language-specific funding disclaimer. */}
       <footer className="border-t border-ink/10">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 px-6 py-12 text-center">
           <FoundationCredit />
+          <FundingDisclaimer />
           <p className="text-sm text-muted">
             © {new Date().getFullYear()} {t('brand')} — {t('footer.rights')}
           </p>

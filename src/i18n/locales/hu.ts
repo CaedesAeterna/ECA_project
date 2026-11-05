@@ -5,7 +5,7 @@ const hu = {
   nav: {
     project: 'EKA projekt',
     partners: 'Partnerek',
-    resources: 'Tudásforrás',
+    resources: 'Tudásforrás és eredmények',
     events: 'Események',
   },
   home: {
@@ -35,37 +35,57 @@ const hu = {
     ],
   },
   resources: {
-    title: 'Tudásforrás',
+    title: 'Tudásforrás és eredmények',
     paragraphs: [
-      'Ha egy mondatban akarnánk összefoglalni a projekt célját, ez így hangzana: felkészíteni a tanítókat, hogy képesek legyenek a lehető legnagyobb tanulási autonómiát biztosítani a diákoknak a lehető legbiztonságosabb tanulási légkörben. Ez a tantervünk végső célja is.',
-      'A kézikönyv gyakorlati eszközöket tartalmaz a személyközpontú, ECA-alapú (Emóció–Kogníció–Akció) oktatáshoz alsó tagozaton. Tanítóként játékokat, sablonokat, óravázlatokat és ellenőrzőlistákat találsz itt. Miközben ezekkel a gyakorlati eszközökkel ismerkedsz, elsajátítod a személyközpontú pedagógia attitűdjét is, hiszen az ECA erre épül.',
+      'Itt találod az ECA projekt eredményeit és letölthető szakmai anyagait: a pedagógiai alapoktól a mindennapi tanításban használható eszközökig. A dokumentumok a kiválasztott nyelven jelennek meg; a kártyák magyarul és angolul, A nagy ECA könyv csak magyarul érhető el.',
     ],
-    items: [
-      {
-        title: 'ECA QUICK MAP',
-        body: 'Egy gyorsan áttekinthető vizuális iránytű a teljes ECA programhoz.',
-      },
-      {
-        title: 'ECA óraminta',
-        body: 'Egy könnyen használható sablon.',
-      },
-    ],
-    handbook: 'ECA tanári kézikönyv',
-    curriculum: 'ECA tanterv',
-    practice: 'ECA jó gyakorlatok',
     download: 'Letöltés (PDF)',
-    more: 'További tananyagok',
+    downloadDocument: '{{title}} letöltése (PDF)',
+    more: 'További tananyagok és példák',
+    loading: 'A dokumentumok betöltése…',
+    loadError: 'A dokumentumok most nem tölthetők be. Kérjük, próbáld újratölteni az oldalt.',
     categories: {
-      training_plan: 'Tanári továbbképzési terv',
-      activities: '50 gyakorlati ECA feladat',
+      curriculum: 'ECA tanterv',
+      handbook: 'ECA tanári kézikönyv',
+      training_plan: 'ECA tanári továbbképzési terv',
+      activities: 'ECA gyakorlati feladatgyűjtemény',
+      practice: 'ECA jó gyakorlatok útmutató',
       cards: 'ECA kártyák és felhasználási segédlet',
       templates: 'ECA sablonok',
-      book: 'ECA könyv',
-      summary: 'A projekt eredményeinek összefoglalója',
+      book: 'A nagy ECA könyv',
       lesson_plan: 'Óravázlatok',
       worksheet: 'Feladatlapok',
       hw: 'Házi feladatok',
       questions: 'Kérdésgyűjtemény',
+      summary: 'A projekt eredményeinek összefoglalója',
+    },
+    results: {
+      curriculum: [
+        'Az ECA Tanterv az elsősorban alsó tagozatos oktatásra kidolgozott Érzelem–Megismerés–Cselekvés megközelítés elméleti és módszertani keretét mutatja be. Leírja, hogyan kapcsolhatók össze tudatosan az érzelmek, a kognitív tanulás és a gyakorlati cselekvés a tanulási folyamatban. A tanterv ismerteti az ECA-megközelítés pedagógiai alapelveit, céljait, célcsoportjait, tanulási területeit és a kompetenciák várható fejlődését. Támogatja a pedagógusokat olyan tanulási helyzetek kialakításában, amelyek ötvözik az érzelmi bevonódást, a gondolkodást, a kreativitást, a választási lehetőségeket, az együttműködést, a reflexiót és a valós élethez kapcsolódó cselekvést. A tanterv az ECA projekt keretében kidolgozott Pedagóguskézikönyv, képzési program és gyakorlati tananyagok szemléleti alapjául szolgál. Magyar, angol és lengyel nyelven érhető el.',
+      ],
+      handbook: [
+        'Az ECA tanári kézikönyv gyakorlati útmutató alsó tagozatos pedagógusok számára, akik az Érzelem–Megismerés–Cselekvés megközelítést szeretnék alkalmazni a mindennapi iskolai gyakorlatban. Bemutatja, hogyan vezethetők be fokozatosan az ECA elemei a tanítás teljes, egyszerre történő átalakítása nélkül. A kézikönyv foglalkozik a pedagógus facilitátori szerepével, az érzelmek, a megismerés és a cselekvés gyakorlati összekapcsolásával, a természettudományos és ökológiai tanulással, az egyénre szabott és differenciált tanulással, valamint az értékelés módszereivel. Kiemelt figyelmet fordít a pedagógusok önreflexiójára, a tanulói autonómia, a választási lehetőségek és a tanulásért vállalt felelősség növelésére. A módszertani útmutatást reflexiós kérdésekkel, gyakorlati példákkal, tanítási eszközökkel és óratervekkel kapcsolja össze, segítve a pedagógusokat abban, hogy az ECA-t saját tanulóikhoz és tanulási környezetükhöz igazítsák. Magyar, angol és lengyel nyelven érhető el.',
+      ],
+      training_plan: [
+        'Az ECA tanár továbbképzési Terv egy ötnapos, 30 órás szakmai program pedagógusok, trénerek és tanulási folyamatokat segítő szakemberek számára. Az ECA keretrendszerén belül ötvözi a szociális és érzelmi tanulást, a karaktererősségeket, az érzelmi intelligenciát, a többszörös intelligencia elméletét és a tapasztalati tanulást. A képzés középpontjában a biztonságos és motiváló tanulási környezet kialakítása, a tanulók sokféleségének és egyéni erősségeinek megértése, az inklúzió, a tapasztalati tanulás és az ECA-tevékenységek gyakorlati tervezése áll. Sajátos eleme a városi felfedezés, amely a várost élő tanulási környezetként használja. A program ötvözi az elméletet, a gyakorlati tevékenységeket, a megbeszéléseket, az aktív tanulást és a reflexiót. Az útmutató teljes, 14 modulból álló képzési struktúrát, tevékenységeket és segédanyagokat tartalmaz a képzés megvalósításához. Angol, magyar és lengyel nyelven érhető el.',
+      ],
+      activities: [
+        'Az ECA gyakorlati feladatgyűjtemény 50 gyakorlati tananyagot tartalmaz: 40 óratervet, 4 feladatlapot, 3 házi feladatot és 3 projektvázlatot. A tevékenységeket elsősorban az általános iskola alsó tagozata számára terveztük, és az ECA-megközelítés három elemét kapcsolják össze: az Érzelmet, a Megismerést és a Cselekvést. A természettudományos és ökológiai témákat személyes tapasztalatokon és érzelmi bevonódáson, kérdezésen, megfigyelésen, összehasonlításon, mérésen, gondolkodáson és konkrét cselekvésen keresztül dolgozzák fel. A gyűjtemény kerti és szabadtéri tanulási tevékenységeket, a természet tantermi megismerését, ökológiai témákat és készségfejlesztő feladatokat tartalmaz. A pedagógusok kiválaszthatják és a különböző témákhoz, korosztályokhoz, tanulókhoz és oktatási környezetekhez igazíthatják az anyagokat. A gyűjtemény magyar, angol és lengyel nyelven érhető el.',
+      ],
+      practice: [
+        'Az ECA Jó gyakorlatok útmutatója összegyűjti az ECA fejlesztése, kipróbálása, adaptálása és különböző oktatási környezetekben történő alkalmazása során szerzett legfontosabb tapasztalatokat és tanulságokat. Tanórai foglalkozások, pedagógusképzések, egyetemi programok, táborok, kertek, szabadtéri tevékenységek és közösségi rendezvények tapasztalataira épül. Az útmutató azt vizsgálja, hogy mitől válik egy tanulási folyamat valóban ECA-alapúvá, és kiemeli a tanulói autonómia, a valódi cselekvés, a választás, a reflexió, az együttműködés és a tanulási környezet jelentőségét. A „Képeslapok a gyakorlatból” konkrét tapasztalatokat és tanulságokat mutatnak be, míg hat gyakori csapda arra világít rá, hogy milyen nehézségek merülhetnek fel az ECA alkalmazása során, és gyakorlati alternatívákat javasolnak. Az útmutató arra ösztönzi a pedagógusokat, hogy ne egyszerűen reprodukálják az ECA-anyagokat, hanem saját környezetükhöz igazítsák őket, és jelentésteli ECA-tanulási élményeket hozzanak létre.',
+      ],
+      cards: [
+        'Az ECA-kártyák 20 gyakorlati reflexiós és tevékenységkártyából álló gyűjtemény pedagógusok számára, amelyhez felhasználói útmutató is tartozik. Rövid szövegek, vizuális modellek, kérdések és feladatok kapcsolják össze az ECA-megközelítést a mindennapi pedagógiai gyakorlattal. A kártyák a tanulói autonómiáról, a személyes bevonódásról, az együttműködésről és a jelentésteli cselekvésről való gondolkodásra ösztönöznek. Egyénileg, pedagógusképzéseken vagy szakmai beszélgetések során is használhatók, és különböző igényekhez, helyzetekhez igazíthatók. A kártyák és a felhasználói útmutató angol és magyar nyelven érhetők el.',
+      ],
+      templates: [
+        'Az ECA Sablonok gyűjtemény gyakorlati dokumentumokat kínál az Érzelem–Megismerés–Cselekvés megközelítés alkalmazásának és a projekttevékenységek dokumentálásának támogatására. A magyar változat két fő egységből áll: projektmenedzsment és szakmai dokumentumok. Tartalmaz egy jelenléti ívet, valamint négy pedagógiai sablont: munkalapot, házi feladatot, projekttervet és óravázlatot. Az eszközök segítik a pedagógusokat a tanulási tevékenységek megtervezésében, a tanulói tapasztalatok és reflexiók feldolgozásában, valamint az érzelmek, a megismerés és a cselekvés tudatos összekapcsolásában. A sablonok különböző tanulási helyzetekhez igazíthatók.',
+      ],
+      book: [
+        'A nagy ECA könyv az Emotion–Cognition–Action (Érzelem–Megismerés–Cselekvés) Erasmus+ projekt négy fő szakmai eredményét foglalja egy kötetbe: az ECA Tantervet, a Pedagóguskézikönyvet, az 50 gyakorlati feladatot tartalmazó gyűjteményt és a Pedagógusképzési Tervet.',
+        'A kötet elsősorban az általános iskola alsó tagozatán dolgozó pedagógusoknak kínál elméleti alapokat, módszertani útmutatást és közvetlenül alkalmazható eszközöket. Középpontjában a személyközpontú pedagógia, az érzelmi biztonság, a tanulói autonómia, a tapasztalati tanulás és a természettudományos, ökológiai nevelés áll.',
+        'A négy rész egymásra épül: a tanterv a pedagógiai kereteket, a kézikönyv a megvalósítás módszereit, a feladatgyűjtemény a gyakorlati példákat, a képzési terv pedig a pedagógusok felkészítésének 30 órás programját mutatja be. Az anyagok külön-külön és együtt is használhatók.',
+      ],
     },
   },
   events: {
@@ -85,6 +105,8 @@ const hu = {
   },
   footer: {
     rights: 'Minden jog fenntartva.',
+    openDisclaimer: 'Az uniós finanszírozási nyilatkozat megnyitása teljes méretben',
+    disclaimer: 'Az Európai Unió finanszírozásával. Az itt szereplő információk és állítások a szerző(k) álláspontját képviselik, és nem feltétlenül tükrözik az Európai Unió vagy a Tempus Közalapítvány hivatalos véleményét. Sem az Európai Unió, sem a támogatást nyújtó hatóság nem vonható felelősségre miattuk.',
   },
 } as const
 

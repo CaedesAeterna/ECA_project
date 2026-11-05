@@ -2,79 +2,35 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { mediaUrl, useManifest, type ResourceDoc } from '../lib/manifest'
 
-// Resource files come from the runtime manifest (server/media/manifest.json),
-// already grouped by category -> language and sorted by the seed/CMS. Adding or
-// removing a file is done in the CMS; no rebuild needed.
-
-// Clean download filenames for the three flagship documents, independent of the
-// (messy) source names.
-const DOWNLOAD_NAME: Record<
-  string,
-  { handbook: string; curriculum: string; practice: string }
-> = {
-  en: {
-    handbook: 'ECA_Handbook_EN.pdf',
-    curriculum: 'ECA_Curriculum_EN.pdf',
-    practice: 'ECA_Best_Practice_EN.pdf',
-  },
-  hu: {
-    handbook: 'ECA_tanari_kezikonyv_HU.pdf',
-    curriculum: 'ECA_tanterv_HU.pdf',
-    practice: 'ECA_jo_gyakorlatok_HU.pdf',
-  },
-  pl: {
-    handbook: 'ECA_Podrecznik_PL.pdf',
-    curriculum: 'ECA_Program_nauczania_PL.pdf',
-    practice: 'ECA_Dobre_praktyki_PL.pdf',
-  },
-}
-
-// Extra material types shown as collapsible panels, in this display order.
-const MORE_CATEGORIES = [
+// Follow the programme from its pedagogical foundations to practical tools
+// and the collected volume. Each result uses only the active language's PDFs.
+const RESULT_CATEGORIES = [
+  'curriculum',
+  'handbook',
   'training_plan',
   'activities',
+  'practice',
   'cards',
   'templates',
   'book',
-  'summary',
-  'lesson_plan',
-  'worksheet',
-  'hw',
-  'questions',
 ] as const
 
-// Document (file) icon.
+const MORE_CATEGORIES = ['lesson_plan', 'worksheet', 'hw', 'questions', 'summary'] as const
+
 function DocIcon({ className }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="none"
+      stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <path d="M14 3v5h5" />
       <path d="M15 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z" />
     </svg>
   )
 }
 
-// Down-arrow (download) icon.
 function DownloadArrow({ className }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="none"
+      stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 3v12" />
       <path d="M7 10l5 5 5-5" />
       <path d="M5 21h14" />
@@ -82,76 +38,61 @@ function DownloadArrow({ className }: { className?: string }) {
   )
 }
 
-// Chevron used as the accordion open/close indicator.
-function Chevron({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M6 9l6 6 6-6" />
-    </svg>
-  )
-}
-
-// One prominent download card for a flagship PDF (handbook or curriculum).
-function DownloadCard({
-  href,
-  download,
-  title,
-  subtitle,
-}: {
-  href: string
-  download: string
-  title: string
-  subtitle: string
-}) {
-  return (
-    <a
-      href={href}
-      download={download}
-      className="group flex items-center gap-4 rounded-2xl border-2 border-brand bg-brand/5 px-6 py-5 text-ink transition-colors hover:bg-brand hover:text-white"
-    >
-      <DocIcon className="h-9 w-9 shrink-0 text-brand group-hover:text-white" />
-      <span className="flex flex-col">
-        <span className="font-display text-lg font-extrabold tracking-tight">{title}</span>
-        <span className="text-sm text-muted group-hover:text-white/80">{subtitle}</span>
-      </span>
-      <DownloadArrow className="ml-auto h-6 w-6 shrink-0" />
-    </a>
-  )
-}
-
-// A single downloadable file row inside an accordion panel.
 function FileLink({ doc }: { doc: ResourceDoc }) {
   return (
-    <a
-      href={mediaUrl(doc.file)}
-      download={doc.download}
-      className="flex items-center gap-3 rounded-lg px-3 py-2 text-ink transition-colors hover:bg-brand/10"
-    >
+    <a href={mediaUrl(doc.file)} download={doc.download}
+      className="flex items-center gap-3 rounded-lg px-3 py-2 text-ink transition-colors hover:bg-brand/10">
       <DocIcon className="h-5 w-5 shrink-0 text-brand" />
       <span className="flex min-w-0 flex-1 flex-col">
         {doc.group && (
-          <span className="truncate text-xs font-semibold uppercase tracking-wide text-brand/80">
+          <span className="text-xs font-semibold uppercase tracking-wide text-brand/80">
             {doc.group}
           </span>
         )}
-        <span className="truncate">{doc.title}</span>
+        <span className="break-words">{doc.title}</span>
       </span>
       <DownloadArrow className="h-4 w-4 shrink-0 text-muted" />
     </a>
   )
 }
 
-// A collapsible panel listing every file of one material type (native <details>,
-// so it works without JS and is keyboard-accessible).
+function ResultCard({ category, title, paragraphs, docs }: {
+  category: string
+  title: string
+  paragraphs: readonly string[]
+  docs: ResourceDoc[]
+}) {
+  const { t } = useTranslation()
+
+  return (
+    <article aria-labelledby={`result-${category}`}
+      className="rounded-2xl border border-ink/10 bg-white p-6 shadow-sm sm:p-8">
+      <h2 id={`result-${category}`}
+        className="font-display text-xl font-extrabold tracking-tight text-brand sm:text-2xl">
+        {title}
+      </h2>
+      <div className="mt-4 space-y-3 leading-relaxed text-ink">
+        {paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+      </div>
+      <ul className="mt-6 flex flex-wrap gap-3 border-t border-ink/10 pt-5">
+        {docs.map((doc) => (
+          <li key={doc.file} className="max-w-full">
+            <a href={mediaUrl(doc.file)} download={doc.download}
+              aria-label={t('resources.downloadDocument', { title: doc.title })}
+              className="inline-flex max-w-full items-center gap-3 rounded-xl bg-brand px-5 py-3 font-semibold text-white transition-colors hover:bg-brand/85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
+              <DocIcon className="h-5 w-5 shrink-0" />
+              <span className="min-w-0 break-words">
+                {docs.length === 1 ? t('resources.download') : doc.title}
+              </span>
+              <DownloadArrow className="h-5 w-5 shrink-0" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </article>
+  )
+}
+
 function MaterialPanel({ title, docs }: { title: string; docs: ResourceDoc[] }) {
   return (
     <details className="group rounded-2xl border border-ink/10 bg-white/60 px-5 open:bg-white">
@@ -160,14 +101,14 @@ function MaterialPanel({ title, docs }: { title: string; docs: ResourceDoc[] }) 
         <span className="rounded-full bg-brand/10 px-2 py-0.5 text-xs font-semibold text-brand">
           {docs.length}
         </span>
-        <Chevron className="ml-auto h-5 w-5 text-muted transition-transform group-open:rotate-180" />
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+          strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+          className="ml-auto h-5 w-5 shrink-0 text-muted transition-transform group-open:rotate-180">
+          <path d="M6 9l6 6 6-6" />
+        </svg>
       </summary>
       <ul className="border-t border-ink/10 py-2">
-        {docs.map((doc, i) => (
-          <li key={i}>
-            <FileLink doc={doc} />
-          </li>
-        ))}
+        {docs.map((doc) => <li key={doc.file}><FileLink doc={doc} /></li>)}
       </ul>
     </details>
   )
@@ -175,106 +116,53 @@ function MaterialPanel({ title, docs }: { title: string; docs: ResourceDoc[] }) 
 
 export default function ResourcesPage() {
   const { t, i18n } = useTranslation()
-  const { data } = useManifest()
-
-  // Body copy and the feature cards are stored in the locale files.
+  const { data, error } = useManifest()
+  const language = (i18n.resolvedLanguage ?? 'en').slice(0, 2)
   const paragraphs = t('resources.paragraphs', { returnObjects: true }) as string[]
-  const items = t('resources.items', { returnObjects: true }) as {
-    title: string
-    body: string
-  }[]
-
-  // Serve the material set matching the active UI language, English as fallback
-  // for the three flagship documents. The extra materials are language-specific:
-  // a panel simply doesn't appear if that language has no files yet.
-  const lang = (i18n.resolvedLanguage ?? 'en').slice(0, 2)
-  const resources = data?.resources ?? {}
-  const docsFor = (cat: string, l: string): ResourceDoc[] => resources[cat]?.[l] ?? []
-  const handbook = docsFor('handbook', lang)[0] ?? docsFor('handbook', 'en')[0]
-  const curriculum = docsFor('curriculum', lang)[0] ?? docsFor('curriculum', 'en')[0]
-  const practice = docsFor('practice', lang)[0] ?? docsFor('practice', 'en')[0]
-  const names = DOWNLOAD_NAME[lang] ?? DOWNLOAD_NAME.en
-
-  const morePanels = MORE_CATEGORIES.map((cat) => ({
-    cat,
-    docs: docsFor(cat, lang),
-  })).filter((panel) => panel.docs.length > 0)
+  const descriptions = t('resources.results', { returnObjects: true }) as Record<
+    (typeof RESULT_CATEGORIES)[number], string[]
+  >
+  const docsFor = (category: string) => data?.resources[category]?.[language] ?? []
+  const results = RESULT_CATEGORIES.map((category) => ({ category, docs: docsFor(category) }))
+    .filter(({ docs }) => docs.length > 0)
+  const morePanels = MORE_CATEGORIES.map((category) => ({ category, docs: docsFor(category) }))
+    .filter(({ docs }) => docs.length > 0)
 
   return (
-    <section className="mx-auto max-w-3xl">
+    <section className="mx-auto max-w-4xl">
       <h1 className="text-center font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
         {t('resources.title')}
       </h1>
-
-      <div className="mt-10 space-y-5 text-lg leading-relaxed text-ink">
-        {paragraphs.map((paragraph, i) => (
-          <p key={i}>{paragraph}</p>
+      <div className="mt-8 space-y-4 text-lg leading-relaxed text-ink">
+        {paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+      </div>
+      {!data && (
+        <p role="status" className="mt-10 text-center text-muted">
+          {t(error ? 'resources.loadError' : 'resources.loading')}
+        </p>
+      )}
+      <div className="mt-10 space-y-6">
+        {results.map(({ category, docs }) => (
+          <ResultCard key={category} category={category}
+            title={t(`resources.categories.${category}`)}
+            paragraphs={descriptions[category]} docs={docs} />
         ))}
       </div>
-
-      {/* The two building blocks described in the handbook. */}
-      <div className="mt-10 grid gap-5 sm:grid-cols-2">
-        {items.map((item, i) => (
-          <div key={i} className="rounded-2xl bg-white p-6 shadow-sm">
-            <h2 className="font-display text-lg font-extrabold tracking-tight text-brand">
-              {item.title}
-            </h2>
-            <p className="mt-2 leading-relaxed text-muted">{item.body}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Language-matched flagship downloads: teacher handbook, curriculum and
-          the best-practice collection (one document per language each). All three
-          are the same size — one grid cell, matching the info cards above. */}
-      <div className="mt-10 grid gap-5 sm:grid-cols-2">
-        {handbook && (
-          <DownloadCard
-            href={mediaUrl(handbook.file)}
-            download={names.handbook}
-            title={t('resources.handbook')}
-            subtitle={t('resources.download')}
-          />
-        )}
-        {curriculum && (
-          <DownloadCard
-            href={mediaUrl(curriculum.file)}
-            download={names.curriculum}
-            title={t('resources.curriculum')}
-            subtitle={t('resources.download')}
-          />
-        )}
-        {practice && (
-          <DownloadCard
-            href={mediaUrl(practice.file)}
-            download={names.practice}
-            title={t('resources.practice')}
-            subtitle={t('resources.download')}
-          />
-        )}
-      </div>
-
-      {/* Collapsible panels for the remaining material types. Hidden entirely
-          when the active language has none of them. */}
       {morePanels.length > 0 && (
-        <div className="mt-12">
+        <div className="mt-14">
           <h2 className="font-display text-xl font-extrabold tracking-tight text-ink">
             {t('resources.more')}
           </h2>
           <div className="mt-4 space-y-3">
-            {morePanels.map(({ cat, docs }) => (
-              <MaterialPanel key={cat} title={t(`resources.categories.${cat}`)} docs={docs} />
+            {morePanels.map(({ category, docs }) => (
+              <MaterialPanel key={category} title={t(`resources.categories.${category}`)} docs={docs} />
             ))}
           </div>
         </div>
       )}
-
-      {/* Bottom button: the 3-letter wordmark, back to the home page. */}
       <div className="mt-12 flex justify-center">
-        <Link
-          to="/"
-          className="rounded-full border-2 border-brand px-6 py-2 font-display text-sm font-extrabold uppercase tracking-wide text-brand transition-colors hover:bg-brand hover:text-white"
-        >
+        <Link to="/"
+          className="rounded-full border-2 border-brand px-6 py-2 font-display text-sm font-extrabold uppercase tracking-wide text-brand transition-colors hover:bg-brand hover:text-white">
           {t('brand')}
         </Link>
       </div>
